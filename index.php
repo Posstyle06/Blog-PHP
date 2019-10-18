@@ -45,21 +45,7 @@ try
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') 
         {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
-            {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) 
-                {
-                    $comment = new Comment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
-                    FrontendController::addComment($comment);
-                }
-                else 
-                {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
-                }
-            }
-            else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }  
+            FrontendController::addComment();
         }
 
         //Affiche un commentaire pour modif
