@@ -13,7 +13,7 @@ class CommentManager extends Manager
         return $comments;
     }
 
-    public function getComment($idComment)
+    public function getSingleComment($idComment)
     {
         $db = $this->dbConnect();
         $comment = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM comments WHERE id = ? ');
@@ -23,13 +23,19 @@ class CommentManager extends Manager
         return $comment;
     }
 
-    public function postComment($postId, $author, $comment)
+    public function addComment(Comment $comment)
     {
+        $a=$comment->getPostId();
+        $b=$comment->getAuthor();
+        $c=$comment->getComment();
         $db = $this->dbConnect();
-        $comments = $db->exec("INSERT INTO comments(post_id, author, comment) VALUES('$postId', '$author', '$comment')");
-       
+        $req = $db->prepare("INSERT INTO comments(post_id, author, comment) VALUES(?, ?, ?)");
+        $req->bindParam(1, $a);
+        $req->bindParam(2, $b);
+        $req->bindParam(3, $c);
+        $req->execute();
 
-        return $comments;
+        return $req->rowCount();
     }
 
     public function updateComment($idComment, $author, $newcomment)

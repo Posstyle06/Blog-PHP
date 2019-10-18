@@ -35,7 +35,7 @@ class PostManager extends Manager
 
     public function addPost(Post $post)
     {
-        $a=$post->author_post();
+        $a=$post->getAuthorPost();
         $b=$post->title();
         $c=$post->content();
         $db = $this->dbConnect();
