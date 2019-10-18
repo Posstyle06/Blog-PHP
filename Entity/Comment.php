@@ -18,31 +18,31 @@ class Comment {
 
     public function postId()
     {
-      return $this->_postId;
+      return $this->postId;
     }
 
     public function author()
     {
-      return $this->_author;
+      return $this->author;
     }
 
     public function comment()
     {
-      return $this->_comment;
+      return $this->comment;
     }
 
     public function setPostId($postId)
     {
-    $this->_postId = $postId;
+    $this->postId = $postId;
     }
 
     public function setComment($comment)
     {
-    $this->_comment = $comment;
+    $this->comment = $comment;
     }
 
     public function setAuthor($author)
     {
-    $this->_author = $author;
+    $this->author = $author;
     }
 }

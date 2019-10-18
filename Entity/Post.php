@@ -18,31 +18,31 @@ class Post {
 
     public function author_post()
     {
-      return $this->_author_post;
+      return $this->author_post;
     }
 
     public function title()
     {
-      return $this->_title;
+      return $this->title;
     }
 
     public function content()
     {
-      return $this->_content;
+      return $this->content;
     }
 
     public function setAuthor($author_post)
     {
-    $this->_author_post = $author_post;
+    $this->author_post = $author_post;
     }
 
     public function setTitle($title)
     {
-    $this->_title = $title;
+    $this->title = $title;
     }
 
     public function setContent($content)
     {
-    $this->_content = $content;
+    $this->content = $content;
     }
 }
