@@ -5,7 +5,7 @@ class Comment {
 	private $id;
 	private $comment;
 	private $author;
-	private $comment_date;
+	private $commentDate;
 	private $postId;
 
 	public function __construct($postId, $author, $comment) 
@@ -16,19 +16,29 @@ class Comment {
       $this->setPostId($postId); 
     }
 
-    public function postId()
+    public function getId()
+    {
+      return $this->id;
+    }
+
+    public function getPostId()
     {
       return $this->postId;
     }
 
-    public function author()
+    public function getAuthor()
     {
       return $this->author;
     }
 
-    public function comment()
+    public function getComment()
     {
       return $this->comment;
+    }
+
+    public function getCommentDate()
+    {
+      return $this->commentDate;
     }
 
     public function setPostId($postId)

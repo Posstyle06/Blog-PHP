@@ -4,36 +4,46 @@ class Post {
 
 	private $id;
 	private $title;
-	private $author_post;
-	private $creation_date;
+	private $authorPost;
+	private $creationDate;
 	private $content;
 
-	public function __construct($author_post, $title, $content) 
+	public function __construct($authorPost, $title, $content) 
     {
       echo 'Voici le constructeur !'; 
-      $this->setAuthor($author_post); 
+      $this->setAuthor($authoPost); 
       $this->setTitle($title); 
       $this->setContent($content); 
     }
 
-    public function author_post()
+    public function getId()
     {
-      return $this->author_post;
+      return $this->id;
     }
 
-    public function title()
+    public function getAuthorPost()
+    {
+      return $this->authorPost;
+    }
+
+    public function getTitle()
     {
       return $this->title;
     }
 
-    public function content()
+    public function getContent()
     {
       return $this->content;
     }
 
-    public function setAuthor($author_post)
+    public function getCreationDate()
     {
-    $this->author_post = $author_post;
+      return $this->creationDate;
+    }
+
+    public function setAuthor($authorPost)
+    {
+    $this->authorPost = $authorPost;
     }
 
     public function setTitle($title)
