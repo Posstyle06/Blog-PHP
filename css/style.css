@@ -1,0 +1,36 @@
+body{
+    background-color:rgb(188,254,188);
+}
+
+h1, h3
+{
+    text-align:center;
+}
+h3
+{
+    
+}
+
+.news h3{
+    padding: 2px;
+}
+
+.news p
+{
+    background-color:#CCCCCC;
+    margin-top: 0;
+    padding: 10px
+}
+.news
+{
+    width:70%;
+    margin:auto;
+    padding: 10px;
+}
+
+a
+{
+    text-decoration: none;
+    color: blue;
+   
+}
