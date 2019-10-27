@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <script src="https://cdn.tiny.cloud/1/2y5ag8foxfg0jmbvv4udk2e7hi0te1liclpdpynmivjtpzq8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>tinymce.init({
+            selector:'textarea', 
+            plugins: [
+              'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+              'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+              'save table directionality emoticons template paste'
+            ],
+            width: 600,
+            height: 300,
+            entity_encoding: "raw"
+        });</script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css" />
@@ -8,10 +20,7 @@
         <title><?= $title ?></title>
         <meta name="description" content="Blog billet pour l'Alaska" />
     </head>
-    <header>
-        <a href="http://localhost/PHP/projet4/index.php" ><img src="public/images/logo_livre.PNG" alt="logo livre"/></a>
-        <button>Accès administrateur</button>
-    </header>    
+
     <body>
         <?= $content ?>
     </body>
