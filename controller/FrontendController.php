@@ -1,7 +1,7 @@
 <?php
 class FrontendController {
 
-//Récupère la list de tous les posts et l'affich
+//Récupère la list de tous les posts et l'affiche
 static function listPosts()
 {
     $postManager = new PostManager(); // Création d'un objet
@@ -53,6 +53,8 @@ static function addComment()
             if (!empty($_POST['author']) && !empty($_POST['comment'])) 
             {
                 $comment = new Comment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
+                var_dump($comment);
+                die();
                 $commentManager = new CommentManager();
                 $affectedLines = $commentManager->addComment($comment);
 
@@ -103,7 +105,7 @@ static function updateComment($idComment, $author, $newcomment)
     $comment = $commentManager->getSingleComment($idComment);
 
    
-      require('view/frontend/CommentView.php');
+    require('view/frontend/CommentView.php');
     
 
 }
