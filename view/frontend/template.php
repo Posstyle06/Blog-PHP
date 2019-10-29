@@ -11,7 +11,7 @@
             ],
             width: 600,
             height: 300,
-            entity_encoding: "raw"
+            entity_encoding : "raw",
         });</script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">

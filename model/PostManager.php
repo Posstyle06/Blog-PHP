@@ -1,7 +1,5 @@
 <?php
 
-require_once("model/Manager.php");
-
 class PostManager extends Manager
 {
     
@@ -10,8 +8,7 @@ class PostManager extends Manager
     public function getPosts()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, author_post, title, content, date_format(creation_date, "%d/%m/%Y à %Hh%i") AS date FROM posts ORDER BY id DESC LIMIT 5');
-
+        $req = $db->query('SELECT id, author, title, content, date_format(creation_date, "%d/%m/%Y à %Hh%i") AS date FROM posts ORDER BY id DESC LIMIT 5');
         return $req;
 
         $req->closeCursor(); // Termine le traitement de la requête
@@ -22,7 +19,7 @@ class PostManager extends Manager
     public function getPost($postId)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, author_post, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM posts WHERE id = ?');
+        $req = $db->prepare('SELECT id, author, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $post = $req->fetch();
 
@@ -39,7 +36,7 @@ class PostManager extends Manager
         $b=$post->title();
         $c=$post->content();
         $db = $this->dbConnect();
-        $req = $db->prepare("INSERT INTO posts (author_post, title, content, creation_date) VALUES
+        $req = $db->prepare("INSERT INTO posts (author, title, content, creation_date) VALUES
         (?, ?, ?, NOW())");
         $req->bindParam(1, $a);
         $req->bindParam(2, $b);

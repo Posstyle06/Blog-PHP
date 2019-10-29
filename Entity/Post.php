@@ -10,7 +10,6 @@ class Post {
 
 	public function __construct($authorPost, $title, $content) 
     {
-      echo 'Voici le constructeur !'; 
       $this->setAuthor($authoPost); 
       $this->setTitle($title); 
       $this->setContent($content); 

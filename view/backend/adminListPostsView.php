@@ -4,13 +4,6 @@
 
 <header>
     <a href="http://localhost/PHP/projet4/index.php"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
-
-    <form id="connectForm" action="index.php?action=connectAdmin">
-      Connexion administrateur<br/><br/>
-      Pseudo: <input type="text" name="pseudo" id="pseudo" value=><br>
-      Password: <input type="password" name="pass" id="pass" value=><br>
-      <button id="Connexion" type="submit">Valider</button>
-    </form>
     <h1>Billet pour l'Alaska</h1>
 </header>    
 

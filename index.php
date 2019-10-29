@@ -23,10 +23,19 @@ try
 
     if (isset($_GET['action'])) 
     {
+
         if ($_GET['action'] == 'listPosts') 
         {
             FrontendController::listPosts();
         }
+
+        //connexion administrateur
+        elseif ($_GET['action'] == 'connectAdmin') 
+        {
+            
+            BackendController::adminConnect(); 
+            
+        }  
 
         //Ajout d'un post
         elseif ($_GET['action'] == 'addpost') 

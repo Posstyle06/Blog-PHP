@@ -24,22 +24,31 @@ header{
 #connectForm{
     border: 2px double black;
     border-radius: 4px;
-    width: 200px;
+    width: 265px;
     padding: 10px;
     position: absolute;
-    right: 2%;
-    top: 15px;
+    right: 1%;
+    top: 13px;
 }
 
 #connectForm button{
-    margin-top: 5px;
     background-color: rgb(188,254,188);
     border-radius: 4px; 
     padding: 5px;
+    display: block;
+    margin: 5px auto;
+}
+
+#connectForm span{
+    font-weight: bold;
 }
 
 #connectForm button:hover{
     background-image: linear-gradient(to right, lightblue, white, lightblue);
+}
+
+#connectForm input{
+    margin-bottom: 5px;
 }
 
 h1{

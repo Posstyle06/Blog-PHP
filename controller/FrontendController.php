@@ -52,7 +52,8 @@ static function addComment()
         {
             if (!empty($_POST['author']) && !empty($_POST['comment'])) 
             {
-                $comment = new Comment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
+                
+                $comment = new Comment($_GET['id'], addslashes($_POST['author']), htmlentities($_POST['comment']));
                 var_dump($comment);
                 die();
                 $commentManager = new CommentManager();
