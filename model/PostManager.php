@@ -33,8 +33,8 @@ class PostManager extends Manager
     public function addPost(Post $post)
     {
         $a=$post->getAuthorPost();
-        $b=$post->title();
-        $c=$post->content();
+        $b=$post->getTitle();
+        $c=$post->getContent();
         $db = $this->dbConnect();
         $req = $db->prepare("INSERT INTO posts (author, title, content, creation_date) VALUES
         (?, ?, ?, NOW())");

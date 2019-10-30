@@ -7,13 +7,11 @@ class MemberManager extends Manager
 	{
 
 	    $db = $this->dbConnect();
-	    $req = $db->prepare('SELECT id, pass FROM members WHERE id = ? ');
-	    $req->execute(array($pseudo));
-	    $req = $req->fetch();
-
-	    return $req;
-
-	    $req->closeCursor();
+	    $req = $db->query('SELECT id, pass FROM members WHERE pseudo = "'.$pseudo.'"');
+		$result = $req->fetch();
+		$req->closeCursor();
+		
+		return $result;
 	}
 
 }

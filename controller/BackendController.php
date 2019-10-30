@@ -15,13 +15,13 @@ class BackendController {
             $postManager = new PostManager(); // Création d'un objet
             $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
             $memberManager = new MemberManager();
-            $result = $memberManager->getMember($pseudo);
+            $result = $memberManager->getMember($_POST['pseudo']);
 
             $isPasswordCorrect = password_verify($pseudo, $result['pass']);
 
             if ($result) {
            
-                if ($isPasswordCorrect OR htmlspecialchars($peudo===$result['pass']) {
+                if ($isPasswordCorrect OR htmlspecialchars($peudo===$result['pass'])) {
                     session_start();
 
                     if (isset($_POST['case'])) 
@@ -31,7 +31,7 @@ class BackendController {
                     setcookie('pseudo', $_POST['pseudo'], time() + 365*24*3600, null, null, false, true); 
                     setcookie('pass', $result['pass'], time() + 365*24*3600, null, null, false, true); 
 
-                    require('view/backend/AdminListPostsView.php');
+                    require('view/backend/adminListPostsView.php');
                     }
                     else
                     {
@@ -40,10 +40,18 @@ class BackendController {
                     setcookie('pseudo','');
                     setcookie('pass','');
 
-                    header('view/backend/AdminListPostsView.php');
+                    require('view/backend/adminListPostsView.php');
                     }
                 }
+                else{
+                    throw new Exception("Identifiant ou mot de passe incorrect");      
+                }
             }
+            else{
+                throw new Exception("Identifiant ou mot de passe incorrect");
+            }
+        }
+    }
 
 
     //Récupère la list de tous les posts et l'affiche
@@ -52,7 +60,7 @@ class BackendController {
         $postManager = new PostManager(); // Création d'un objet
         $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
 
-        require('view/frontend/adminListPostsView.php');
+        require('view/backend/adminListPostsView.php');
     }
 
     //Ajoute un poste
@@ -73,7 +81,7 @@ class BackendController {
             }
             else 
             {
-                header('Location: index.php');
+                BackendController::listPosts();
             }
 
         }

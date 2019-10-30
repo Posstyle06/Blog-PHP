@@ -10,7 +10,7 @@ class Post {
 
 	public function __construct($authorPost, $title, $content) 
     {
-      $this->setAuthor($authoPost); 
+      $this->setAuthor($authorPost); 
       $this->setTitle($title); 
       $this->setContent($content); 
     }

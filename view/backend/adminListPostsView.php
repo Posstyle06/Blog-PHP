@@ -16,7 +16,7 @@ while ($donnees = $posts->fetch())
     <div class="news">
         
         <h3>
-            <?php echo htmlspecialchars ($donnees['title']." Posté par ".$donnees['author_post']." le ".$donnees['date']); ?> :
+            <?php echo htmlspecialchars ($donnees['title']." Posté par ".$donnees['author']." le ".$donnees['date']); ?> :
         </h3>
         
         <p style="padding: 10px">
