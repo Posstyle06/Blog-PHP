@@ -81,7 +81,7 @@ class BackendController {
             }
             else 
             {
-                BackendController::listPosts();
+                header("Location: index.php?action=")
             }
 
         }

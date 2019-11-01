@@ -7,7 +7,7 @@
 <div class="news">
                         
     <h3 style="border:black double 2px; border-top-right-radius: 4px; border-top-left-radius: 4px; padding: 5px;">
-    <?php echo htmlspecialchars ($post['title']." Posté par " .$post['author_post']. " le ".$post['date']); ?> :
+    <?php echo htmlspecialchars ($post['title']." Posté par " .$post['author']. " le ".$post['date']); ?> :
     </h3>
                         
     <p style="border:black double 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; padding: 10px">
