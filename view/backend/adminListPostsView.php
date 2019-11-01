@@ -3,8 +3,10 @@
 <?php ob_start(); ?>
 
 <header>
+    
+        <span id="hello"><?php echo 'Bonjour ' . $_SESSION['pseudo'];?></span>
+    
     <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
-
     <form id="connectForm" action="index.php?action=disconnectAdmin" method="post">
         <button id="disconnect" type="submit">Déconnexion</button>
     </form>

@@ -1,5 +1,9 @@
 body{
+    background-image: url("../public/images/aurore.jpg");
     background-color:rgb(188,254,188);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
 }
@@ -13,6 +17,13 @@ header{
     border-bottom: 2px solid black;
 }
 
+#hello{
+    font-size: 1.5em;
+    font-weight: bold;
+    position: absolute;
+    left: 1%;
+    top: 13px;
+}
 
 #logo{
     width: 100px;
