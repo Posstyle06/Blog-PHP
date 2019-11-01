@@ -54,10 +54,10 @@ static function addComment()
             {
                 
                 $comment = new Comment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
-                var_dump($comment);
-                die();
                 $commentManager = new CommentManager();
                 $affectedLines = $commentManager->addComment($comment);
+                //var_dump($affectedLines);
+                //die;
 
                 if ($affectedLines != 1) {
                     throw new Exception('Impossible d\'ajouter le commentaire !');    

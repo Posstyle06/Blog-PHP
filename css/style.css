@@ -31,7 +31,7 @@ header{
     top: 13px;
 }
 
-#connectForm button{
+#connectForm button, #disconnect{
     background-color: rgb(188,254,188);
     border-radius: 4px; 
     padding: 5px;
@@ -43,7 +43,7 @@ header{
     font-weight: bold;
 }
 
-#connectForm button:hover{
+#connectForm button:hover, #disconnect:hover{
     background-image: linear-gradient(to right, lightblue, white, lightblue);
 }
 
@@ -56,14 +56,17 @@ h1{
 }
 
 .news h3{
-    padding: 2px;
+    padding: 5px;
+    background-image: linear-gradient(to right, lightblue, white, lightblue);
+    border-radius:5px;
 }
 
 .postContent
 {
     background-image: linear-gradient(to right, lightblue, white, lightblue);
     margin-top: 0;
-    padding: 10px
+    padding: 10px;
+    border-radius:5px;
 }
 
 .news
@@ -73,6 +76,7 @@ h1{
     padding: 10px;
     box-shadow: 0px 1px 12px #999;
     margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 .news a
@@ -81,6 +85,7 @@ h1{
     color: blue; 
 }
 
-textarea{
-    background-color: lightgrey;
+#postForm{
+    margin-left: 10px;
+    
 }

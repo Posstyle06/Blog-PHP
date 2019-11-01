@@ -3,7 +3,7 @@
     <head>
         <script src="https://cdn.tiny.cloud/1/2y5ag8foxfg0jmbvv4udk2e7hi0te1liclpdpynmivjtpzq8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>tinymce.init({
-            selector:'textarea', 
+            selector:'textarea#adminContent', 
             plugins: [
               'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
               'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',

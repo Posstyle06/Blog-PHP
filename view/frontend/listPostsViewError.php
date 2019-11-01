@@ -1,7 +1,10 @@
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
+<header>
+    <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
+    <h1>Billet pour l'Alaska</h1>
+</header>    
 <p>Derniers posts du blog :</p>
 
 
@@ -15,12 +18,11 @@ while ($donnees = $posts->fetch())
             <?php echo htmlspecialchars ($donnees['title']." Posté par ".$donnees['author']." le ".$donnees['date']); ?> :
         </h3>
         
-        <p style="padding: 10px">
-            <?php echo nl2br(htmlspecialchars ($donnees['content'])); ?><br/><br/>
+        <div class="postContent">
+            <?php echo nl2br(stripslashes($donnees['content'])); ?><br/><br/>
             <?php $postId=$donnees['id'];?>
-            <a href="http://index.php?action=post&amp;postId=<?php echo $postId;?>">Commentaires</a>
-            
-        </p>
+            <a href="http://localhost/PHP/projet4/index.php?action=post&amp;id=<?php echo $postId;?>">Commentaires</a>     
+        </div>
         
     </div>
 
@@ -29,12 +31,12 @@ while ($donnees = $posts->fetch())
 
 ?>
 
-<form style = " margin-top: 30px; margin-bottom: 50px; text-align: left;" action="index.php?action=addpost" method="post">
+<form id="postForm" action="index.php?action=addpost" method="post">
 
                 <span style="color: red">Tous les champs ne sont pas remplis !</span>
                 <p><label for="author_post">Auteur</label>  <input type="text" name="author_post" id="author_post"/></p>
                 <p><label for="title">Titre du post</label>  <input type="text" name="title" id="title"/></p>
-                <p><label for="content">Rédigez votre article</label><br /><textarea 2px" name="content" id="content" rows= "10" cols="50"></textarea></p>
+                <p><label for="content">Rédigez votre article</label><br /><textarea 2px name="content" id="content" rows= "10" cols="50"></textarea></p>
                 <p><input type="submit" name="newpost" value="Valider" /></p>
 
 </form>

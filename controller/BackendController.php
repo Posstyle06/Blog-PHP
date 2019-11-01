@@ -53,37 +53,65 @@ class BackendController {
         }
     }
 
+    //Déconnexion administrateur
+    static function adminDisconnect()
+    {
+        session_start();
+
+        // Suppression des variables de session et de la session
+        $_SESSION = array();
+        session_destroy();
+
+        // Suppression des cookies de connexion automatique
+        setcookie('login', '');
+        setcookie('pass_hache', '');
+        
+        header('Location: index.php');
+    }
+
 
     //Récupère la list de tous les posts et l'affiche
-    static function listPosts()
+    static function adminlistPosts()
     {
-        $postManager = new PostManager(); // Création d'un objet
-        $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+            
+            $postManager = new PostManager(); // Création d'un objet
+            $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
 
-        require('view/backend/adminListPostsView.php');
+            require('view/backend/adminListPostsView.php');
+        }
+        else{
+            echo "Vous devez être connecté pour accéder à cette page";
+        }
     }
 
     //Ajoute un poste
     static function addPost()
     {
-        if (empty($_POST['author_post']) || empty($_POST['title']) || empty($_POST['content'])) {
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
 
-            FrontendController::listPostsError();
+            if (empty($_POST['author_post']) || empty($_POST['title']) || empty($_POST['content'])) {
+
+                FrontendController::listPostsError();
+            }
+            else{
+            
+                $post = new Post($_POST['author_post'], addslashes($_POST['title']), addslashes($_POST['content']));
+                $postManager = new PostManager(); // Création d'un objet
+                $affectedLines = $postManager->addPost($post); // Appel d'une fonction de cet objet
+
+                if ($affectedLines != 1) {
+                    throw new Exception('Impossible d\'ajouter l\'article !');    
+                }
+                else 
+                {
+                    header("Location: index.php?action=adminListPosts");
+                }
+
+            }
         }
         else{
-        
-            $post = new Post($_POST['author_post'], addslashes($_POST['title']), addslashes($_POST['content']));
-            $postManager = new PostManager(); // Création d'un objet
-            $affectedLines = $postManager->addPost($post); // Appel d'une fonction de cet objet
-
-            if ($affectedLines != 1) {
-                throw new Exception('Impossible d\'ajouter l\'article !');    
-            }
-            else 
-            {
-                header("Location: index.php?action=")
-            }
-
+            echo "Vous devez être connecté pour accéder à cette page";
         }
 
     }

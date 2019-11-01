@@ -27,7 +27,7 @@ class CommentManager extends Manager
         $b=$comment->getAuthor();
         $c=$comment->getComment();
         $db = $this->dbConnect();
-        $req = $db->prepare("INSERT INTO comments(post_id, author, comment) VALUES(?, ?, ?)");
+        $req = $db->prepare("INSERT INTO comments(post_id, author, comment, comment_date) VALUES(?, ?, ?, NOW())");
         $req->bindParam(1, $a);
         $req->bindParam(2, $b);
         $req->bindParam(3, $c);

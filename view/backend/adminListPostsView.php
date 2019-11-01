@@ -3,7 +3,12 @@
 <?php ob_start(); ?>
 
 <header>
-    <a href="http://localhost/PHP/projet4/index.php?action=connectAdmin"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
+    <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
+
+    <form id="connectForm" action="index.php?action=disconnectAdmin" method="post">
+        <button id="disconnect" type="submit">Déconnexion</button>
+    </form>
+
     <h1>Billet pour l'Alaska</h1>
 </header>    
 
@@ -22,8 +27,7 @@ while ($donnees = $posts->fetch())
         <div class="postContent">
             <?php echo nl2br(stripslashes($donnees['content'])); ?><br/><br/>
             <?php $postId=$donnees['id'];?>
-            <a href="http://localhost/PHP/projet4/index.php?action=post&amp;id=<?php echo $postId;?>">Commentaires</a>
-            
+            <a href="http://localhost/PHP/projet4/index.php?action=post&amp;id=<?php echo $postId;?>">Commentaires</a>         
         </div>
         
     </div>
@@ -37,7 +41,7 @@ while ($donnees = $posts->fetch())
 
     <p><label for="author_post">Auteur</label>  <input type="text" name="author_post" id="author_post"/></p>
     <p><label for="title">Titre du post</label>  <input type="text" name="title" id="title"/></p>
-    <p><label for="content">Rédigez votre article</label><br /><textarea name="content" id="content" rows= "10" cols="50"></textarea></p>
+    <p><label for="content">Rédigez votre article</label><br /><textarea 2px name="content" id="adminContent" rows= "10" cols="50"></textarea></p>
     <p><input type="submit" name="newpost" value="Valider" /></p>
 
 </form>

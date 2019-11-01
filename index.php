@@ -30,12 +30,19 @@ try
         }
 
         //connexion administrateur
-        elseif ($_GET['action'] == 'connectAdmin') 
+        elseif ($_GET['action'] == 'connectAdmin')
         {
             
             BackendController::adminConnect(); 
             
-        }  
+        } 
+
+        elseif ($_GET['action'] == 'disconnectAdmin')
+        {
+            
+            BackendController::adminDisconnect(); 
+            
+        }   
 
         //Ajout d'un post
         elseif ($_GET['action'] == 'addpost') 
@@ -88,7 +95,13 @@ try
             {
                 FrontendController::listPosts();
             }
-        }  
+        } 
+
+        //Revenir sur la liste des post en mode Administrateur
+        elseif ($_GET['action'] == 'adminListPosts') 
+        {
+            BackendController::adminListPosts();
+        }   
 
     }
     else 

@@ -9,8 +9,7 @@ class Comment {
 	private $postId;
 
 	public function __construct($postId, $author, $comment) 
-    {
-      echo 'Voici le constructeur !'; 
+    { 
       $this->setComment($comment); 
       $this->setAuthor($author); 
       $this->setPostId($postId); 
