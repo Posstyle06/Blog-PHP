@@ -73,6 +73,7 @@ class BackendController {
     //Récupère la list de tous les posts et l'affiche
     static function adminlistPosts()
     {
+        session_start();
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             
             $postManager = new PostManager(); // Création d'un objet
@@ -85,9 +86,36 @@ class BackendController {
         }
     }
 
+    //Récupère un post et vérifie qu'il existe
+    static function adminPost()
+    {
+        if (isset($_GET['id']) && $_GET['id'] > 0) 
+        {
+            $postManager = new PostManager();
+            $commentManager = new CommentManager();
+
+            $post = $postManager->getPost($_GET['id']);
+            $comments = $commentManager->getComments($_GET['id']);
+
+            if(!empty($post))
+            {
+                require('view/backend/adminPostView.php');
+            }
+            else
+            {
+                throw new Exception('l\'article selectionné n\'existe pas !');
+            }
+        }
+        else{
+            FrontendController::listPosts();
+        }
+    }
+
+
     //Ajoute un poste
     static function addPost()
     {
+        session_start();
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
 
             if (empty($_POST['author_post']) || empty($_POST['title']) || empty($_POST['content'])) {
@@ -114,6 +142,54 @@ class BackendController {
             echo "Vous devez être connecté pour accéder à cette page";
         }
 
+    }
+
+    static function adminComment()
+    {
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+
+            $commentManager = new CommentManager();
+            $comment = $commentManager->getSingleComment($_GET['id']);
+
+            if(!empty($comment))
+            {
+                require('view/backend/adminCommentView.php');
+            }
+            else
+            {
+                throw new Exception('l\'article selectionné n\'existe pas !');
+            }
+        }
+        else{
+            BackendController::adminListPosts();
+        }
+
+    }
+
+    static function updateComment()
+    {
+        $comment = new Comment($_GET['postId'], addslashes($_POST['author']), addslashes($_POST['comment']));
+        $comment->setId($_GET['id']);
+        $commentManager = new CommentManager();
+        $updatedLines = $commentManager->updateComment($comment);
+        
+        header("Location: index.php?action=adminComment&id=".$comment->getId()."&postId=".$_GET['postId']);
+    }
+
+    static function getReportComments()
+    {
+        session_start();
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
+        {
+            
+            $commentManager = new CommentManager(); // Création d'un objet
+            $comments = $commentManager->getReportComments(); // Appel d'une fonction de cet objet
+
+            require('view/backend/moderationView.php');
+        }
+        else{
+            echo "Vous devez être connecté pour accéder à cette page";
+        }
     }
 
 }

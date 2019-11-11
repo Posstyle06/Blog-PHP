@@ -80,35 +80,30 @@ static function addComment()
 
 static function comment()
 {
-    
+    if (isset($_GET['id']) && $_GET['id'] > 0) {
 
-    $commentManager = new CommentManager();
-    $comment = $commentManager->getSingleComment($_GET['id']);
+        $commentManager = new CommentManager();
+        $comment = $commentManager->getSingleComment($_GET['id']);
 
-    if(!empty($comment))
-    {
-        require('view/frontend/CommentView.php');
+        if(!empty($comment))
+        {
+            require('view/frontend/CommentView.php');
+        }
+        else
+        {
+            throw new Exception('l\'article selectionné n\'existe pas !');
+        }
     }
-    else
-    {
-        throw new Exception('l\'article selectionné n\'existe pas !');
+    else{
+        FrontendController::listPosts();
     }
 
 }
 
-
-static function updateComment($idComment, $author, $newcomment)
+static function reportComment()
 {
-    
-
     $commentManager = new CommentManager();
-    $comment = $commentManager->updateComment($idComment, $author, $newcomment);
-    $comment = $commentManager->getSingleComment($idComment);
-
-   
-    require('view/frontend/CommentView.php');
-    
-
+    $comment = $commentManager->reportComment($_GET['id']);
 }
 
 }

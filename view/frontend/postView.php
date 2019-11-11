@@ -36,10 +36,11 @@
                             <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
                                
                         </p>
-                        <a style="position: relative; left: 85%" href="index.php?action=Comment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Modifier</a><br/>
-                        <a style="position: relative; left: 85%" href="index.php?action=report&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Signaler</a>
+                        <?php $id=$donnees['id'];?>
+                        <a style="position: relative; left: 85%" class="report" href="http://localhost/PHP/projet4/index.php?action=reportComment&amp;id=<?php echo $id;?>">Signaler</a>
                         
                     </div>
+
                 <?php
                 }
 ?>

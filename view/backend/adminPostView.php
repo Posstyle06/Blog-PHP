@@ -3,6 +3,8 @@
 <?php ob_start(); ?>
 
 <header>
+    <span id="hello"><?php echo 'Bonjour ' . htmlspecialchars($_COOKIE['pseudo']);?></span>
+
     <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
     <h1>Billet pour l'Alaska</h1>
 </header>   
@@ -38,7 +40,7 @@
                             <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
                                
                         </p>
-                        <a style="position: relative; left: 85%" href="index.php?action=Comment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Modifier</a>
+                        <a style="position: relative; left: 85%" href="index.php?action=adminComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Modifier</a>
                         
                     </div>
                 <?php

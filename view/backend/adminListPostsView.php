@@ -4,7 +4,7 @@
 
 <header>
     
-        <span id="hello"><?php echo 'Bonjour ' . $_SESSION['pseudo'];?></span>
+    <span id="hello"><?php echo 'Bonjour ' . $_SESSION['pseudo'];?></span>
     
     <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
     <form id="connectForm" action="index.php?action=disconnectAdmin" method="post">
@@ -12,7 +12,9 @@
     </form>
 
     <h1>Billet pour l'Alaska</h1>
-</header>    
+</header>   
+
+<a href="http://localhost/PHP/projet4/index.php?action=moderation">Accès aux commentaires signalés</a> 
 
 <p>Derniers articles:</p>
 
@@ -29,7 +31,7 @@ while ($donnees = $posts->fetch())
         <div class="postContent">
             <?php echo nl2br(stripslashes($donnees['content'])); ?><br/><br/>
             <?php $postId=$donnees['id'];?>
-            <a href="http://localhost/PHP/projet4/index.php?action=post&amp;id=<?php echo $postId;?>">Commentaires</a>         
+            <a href="http://localhost/PHP/projet4/index.php?action=adminPost&amp;id=<?php echo $postId;?>">Commentaires</a>         
         </div>
         
     </div>

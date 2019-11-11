@@ -23,20 +23,15 @@ try
 
     if (isset($_GET['action'])) 
     {
-
-        if ($_GET['action'] == 'listPosts') 
-        {
-            FrontendController::listPosts();
-        }
-
         //connexion administrateur
-        elseif ($_GET['action'] == 'connectAdmin')
+        if ($_GET['action'] == 'connectAdmin')
         {
             
             BackendController::adminConnect(); 
             
         } 
 
+        //déconnexion administrateur
         elseif ($_GET['action'] == 'disconnectAdmin')
         {
             
@@ -44,19 +39,41 @@ try
             
         }   
 
-        //Ajout d'un post
-        elseif ($_GET['action'] == 'addpost') 
+        //ACTIONS SUR LES POSTS
+
+        //Récupération de la liste des posts
+        elseif ($_GET['action'] == 'listPosts') 
         {
-            
-            BackendController::addPost(); 
-            
-        }  
+            FrontendController::listPosts();
+        } 
 
         //Selection d'un post avec ses commentaires
         elseif ($_GET['action'] == 'post') 
         {
             FrontendController::post();
         }  
+
+        //Revenir sur la liste des post en mode Administrateur
+        elseif ($_GET['action'] == 'adminListPosts') 
+        {
+            BackendController::adminListPosts();
+        } 
+
+        //Selection d'un post avec ses commentaires en mode admin
+        elseif ($_GET['action'] == 'adminPost') 
+        {
+            BackendController::adminPost();
+        } 
+
+        //Ajout d'un post
+        elseif ($_GET['action'] == 'addpost') 
+        {
+            
+            BackendController::addPost(); 
+            
+        }      
+
+        //ACTIONS SUR LES COMMENTAIRES
 
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') 
@@ -66,16 +83,21 @@ try
 
         //Affiche un commentaire pour modif
         elseif ($_GET['action'] == 'Comment') 
-        {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
-            {
-                FrontendController::comment();
-            }
-            else
-            {
-                FrontendController::listPosts();
-            }
-        }  
+        { 
+            FrontendController::comment();
+        }
+
+        //signaler un commentaire
+        elseif ($_GET['action'] == 'reportComment') 
+        { 
+            FrontendController::reportComment();
+        }
+
+        //Affiche un commentaire pour modif en mode admin
+        elseif ($_GET['action'] == 'adminComment') 
+        { 
+            BackendController::adminComment();
+        }
 
         //Modifie le commentaire
         elseif ($_GET['action'] == 'update') 
@@ -84,7 +106,7 @@ try
             {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) 
                 {
-                    updateComment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
+                    BackendController::updateComment();
                 }
                 else
                 {
@@ -93,15 +115,15 @@ try
             }
             else
             {
-                FrontendController::listPosts();
+                BackendController::adminListPosts();
             }
         } 
 
-        //Revenir sur la liste des post en mode Administrateur
-        elseif ($_GET['action'] == 'adminListPosts') 
+        elseif ($_GET['action'] == 'moderation') 
         {
-            BackendController::adminListPosts();
-        }   
+            BackendController::getReportComments();
+        }
+
 
     }
     else 

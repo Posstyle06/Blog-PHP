@@ -1,11 +1,7 @@
 $(document).ready(function(){  
 
-	//$('#postForm').hide();
-	$('#connectForm').hide();
-
-	$('#connectButton').on("click", function(){
-
-	$('#connectForm').show();
+	$('.report').on("click", function(){
+		return confirm("Are you sure you want to delete?");
 
 	});
 

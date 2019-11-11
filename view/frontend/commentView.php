@@ -11,7 +11,7 @@
 
 <h2>Modifier le commentaire</h2>
 
-<form action="index.php?action=update&amp;id=<?= $_GET['id'] ?>" method="post">
+<form action="index.php?action=update&amp;id=<?= $_GET['id'] ?>&amp;postId=<?= $_GET['postId'] ?>" method="post">
     <div>
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />
