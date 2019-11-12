@@ -21,6 +21,26 @@
         <meta name="description" content="Blog billet pour l'Alaska" />
     </head>
 
+    <header id="adminHeader">
+        <?session_start();?>
+        <span id="hello"><?php echo 'Bonjour ' . $_SESSION['pseudo'];?></span>
+
+        <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
+        <form id="connectForm" action="index.php?action=disconnectAdmin" method="post">
+            <button id="disconnect" type="submit">Déconnexion</button>
+        </form>
+
+        <h1>Billet pour l'Alaska</h1>
+
+        <nav>
+            <ul>
+                <li><a href="http://localhost/PHP/projet4/index.php?action=adminListPosts" title="Liste des articles">liste des articles</a></li>
+                <li><a href="http://localhost/PHP/projet4/index.php?action=newPost" title="Nouvel article">Créer un nouvel article</a></li>
+                <li><a href="http://localhost/PHP/projet4/index.php?action=moderation" title="Modérer les commentaires">Modération des commentaires</a></li>
+            </ul>
+        </nav>
+    </header>    
+
     <body>
         <?= $content ?>
 

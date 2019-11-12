@@ -104,6 +104,25 @@ static function reportComment()
 {
     $commentManager = new CommentManager();
     $comment = $commentManager->reportComment($_GET['id']);
+
+    if ($comment->getReport() != 0) {
+
+        ?>
+ 
+        <script type="text/javascript">
+
+        var variableRecuperee = <?php echo $comment->getPostId(); ?>;
+         
+        alert("le commentaire a bien été signalé à l administrateur");
+        window.location = "http://localhost/PHP/projet4/index.php?action=post&id="+variableRecuperee;
+         
+        </script>
+         
+        <?php
+
+    }
+    
+    FrontendController::listPosts();
 }
 
 }

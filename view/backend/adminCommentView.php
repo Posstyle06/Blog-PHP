@@ -1,10 +1,7 @@
 <?php $title = "Modif commentaire"; ?>
 
 <?php ob_start(); ?>
-<header>
-    <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
-    <h1>Billet pour l'Alaska</h1>
-</header>   
+
 <p><a href="index.php?action=post&amp;id=<?= $comment->getPostId(); ?>">Retour au post</a></p>
 
 

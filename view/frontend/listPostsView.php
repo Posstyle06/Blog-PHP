@@ -16,8 +16,6 @@
     <h1>Billet pour l'Alaska</h1>
 </header>    
 
-<p>Derniers articles:</p>
-
 <?php
 while ($donnees = $posts->fetch())
 {

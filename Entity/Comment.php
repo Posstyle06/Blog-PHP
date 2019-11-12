@@ -7,6 +7,7 @@ class Comment {
 	private $author;
 	private $commentDate;
 	private $postId;
+  private $report;
 
 	public function __construct($postId=null, $author="", $comment="") 
     { 
@@ -32,14 +33,19 @@ class Comment {
       $this->setAuthor($donnees['author']);
     }
 
-    if (isset($donnees['commentDate']))
+    if (isset($donnees['comment-date']))
     {
-      $this->setCommentDate($donnees['commentDate']);
+      $this->setCommentDate($donnees['comment_date']);
     }
 
-    if (isset($donnees['postId']))
+    if (isset($donnees['post_id']))
     {
-      $this->setPostId($donnees['postId']);
+      $this->setPostId($donnees['post_id']);
+    }
+
+    if (isset($donnees['report']))
+    {
+      $this->setReport($donnees['report']);
     }
   }
 
@@ -68,6 +74,11 @@ class Comment {
       return $this->commentDate;
     }
 
+    public function getReport()
+    {
+      return $this->report;
+    }
+
     public function setId($id)
     {
     $this->id = $id;
@@ -91,5 +102,10 @@ class Comment {
     public function setCommentDate($commentDate)
     {
     $this->commentDate = $commentDate;
+    }
+
+    public function setReport($report)
+    {
+    $this->report = $report;
     }
 }

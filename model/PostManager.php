@@ -47,4 +47,17 @@ class PostManager extends Manager
 
     }
 
+//Récupère un post
+
+    public function deletePost($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM posts WHERE id = ?');
+        $req->execute(array($postId));
+
+        $req = $db->prepare('DELETE FROM comments WHERE post_id = ?');
+        $req->execute(array($postId));
+       
+    }
+
 }

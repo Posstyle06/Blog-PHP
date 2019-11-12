@@ -111,6 +111,14 @@ class BackendController {
         }
     }
 
+    //Aller à la vue de création d'un article
+    static function newPost()
+    {
+        session_start();
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+            require('view/backend/newPostView.php');
+        }
+    }
 
     //Ajoute un poste
     static function addPost()
@@ -144,6 +152,29 @@ class BackendController {
 
     }
 
+    //Modification d'un post
+    static function updatePost()
+    {
+        session_start();
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+
+
+        }
+    }
+
+    //Suppression d'un post
+    static function deletePost()
+    {
+        session_start();
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+
+            $postManager = new PostManager();
+            $postManager->deletePost($_GET['id']);
+
+        }
+    }
+
+    //Ajout d'un commentaire
     static function adminComment()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -176,11 +207,35 @@ class BackendController {
         header("Location: index.php?action=adminComment&id=".$comment->getId()."&postId=".$_GET['postId']);
     }
 
+    static function deleteComment()
+    {
+        session_start();
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+
+            $commentManager = new CommentManager();
+            $commentManager->deleteComment($_GET['id']);
+        
+        BackendController::getReportComments();
+        } 
+        else{
+            ?>
+ 
+        <script type="text/javascript">
+         
+        alert("Vous devez être connecter en tant qu'administrateur pour supprimer un commentaire");
+         
+        </script>
+         
+        <?php
+
+        BackendController::adminListPosts();
+        }  
+    }
+
     static function getReportComments()
     {
         session_start();
-        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
-        {
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             
             $commentManager = new CommentManager(); // Création d'un objet
             $comments = $commentManager->getReportComments(); // Appel d'une fonction de cet objet
@@ -188,7 +243,17 @@ class BackendController {
             require('view/backend/moderationView.php');
         }
         else{
-            echo "Vous devez être connecté pour accéder à cette page";
+            ?>
+ 
+        <script type="text/javascript">
+         
+        alert("Vous devez être connecter en tant qu'administrateur pour supprimer un commentaire");
+         
+        </script>
+         
+        <?php
+
+        BackendController::adminListPosts();
         }
     }
 

@@ -65,13 +65,28 @@ try
             BackendController::adminPost();
         } 
 
+        elseif ($_GET['action'] == 'newPost') 
+        {  
+            BackendController::newPost();  
+        } 
+
         //Ajout d'un post
         elseif ($_GET['action'] == 'addpost') 
-        {
-            
-            BackendController::addPost(); 
-            
-        }      
+        {  
+            BackendController::addPost();  
+        } 
+
+        //Modifier un post
+        elseif ($_GET['action'] == 'updatePost') 
+        {  
+            BackendController::updatePost();  
+        }  
+
+        //Supprimer un post
+        elseif ($_GET['action'] == 'deletePost') 
+        {  
+            BackendController::deletePost();  
+        }        
 
         //ACTIONS SUR LES COMMENTAIRES
 
@@ -97,6 +112,18 @@ try
         elseif ($_GET['action'] == 'adminComment') 
         { 
             BackendController::adminComment();
+        }
+
+        //Supprime un commentaire
+        elseif ($_GET['action'] == 'deleteComment') 
+        { 
+            BackendController::deleteComment();
+        }
+
+        //conserve un commentaire
+        elseif ($_GET['action'] == 'keepComment') 
+        { 
+            BackendController::keepComment();
         }
 
         //Modifie le commentaire

@@ -2,12 +2,6 @@
 
 <?php ob_start(); ?>
 
-<header>
-    <span id="hello"><?php echo 'Bonjour ' . htmlspecialchars($_COOKIE['pseudo']);?></span>
-
-    <a href="http://localhost/PHP/projet4/index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
-    <h1>Billet pour l'Alaska</h1>
-</header>   
 
 <p><a href="index.php">Retour à la liste des billets</a></p>
 
