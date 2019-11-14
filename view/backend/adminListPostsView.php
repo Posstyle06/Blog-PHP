@@ -15,9 +15,11 @@ while ($donnees = $posts->fetch())
         <div class="postContent">
             <?php echo nl2br(stripslashes($donnees['content'])); ?><br/><br/>
             <?php $postId=$donnees['id'];?>
-            <a href="http://localhost/PHP/projet4/index.php?action=adminPost&amp;id=<?php echo $postId;?>">Commentaires</a>
-            <a href="http://localhost/PHP/projet4/index.php?action=updatePost&amp;id=<?php echo $postId;?>">Modifier l'article</a>
-            <a href="http://localhost/PHP/projet4/index.php?action=deletePost&amp;id=<?php echo $postId;?>">Supprimer l'article</a>         
+            <div class="postContentButtons">
+                <a href="http://localhost/PHP/projet4/index.php?action=adminPost&amp;id=<?php echo $postId;?>">Commentaires</a>
+                <a href="http://localhost/PHP/projet4/index.php?action=adminUpdatePost&amp;id=<?php echo $postId;?>">Modifier l'article</a>
+                <a href="http://localhost/PHP/projet4/index.php?action=deletePost&amp;id=<?php echo $postId;?>">Supprimer l'article</a> 
+            </div>        
         </div>
         
     </div>

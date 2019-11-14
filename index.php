@@ -76,6 +76,12 @@ try
             BackendController::addPost();  
         } 
 
+        //Affiche un post pour modif en mode admin
+        elseif ($_GET['action'] == 'adminUpdatePost') 
+        {  
+            BackendController::adminUpdatePost();  
+        }  
+
         //Modifier un post
         elseif ($_GET['action'] == 'updatePost') 
         {  

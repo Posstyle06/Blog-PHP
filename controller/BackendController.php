@@ -73,7 +73,10 @@ class BackendController {
     //Récupère la list de tous les posts et l'affiche
     static function adminlistPosts()
     {
-        session_start();
+        if(!isset($_SESSION)){
+            session_start();
+        }
+
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             
             $postManager = new PostManager(); // Création d'un objet
@@ -152,12 +155,41 @@ class BackendController {
 
     }
 
+    //Récupère un post pour modification
+    static function adminUpdatePost()
+    {
+        if (isset($_GET['id']) && $_GET['id'] > 0){
+
+            $postManager = new PostManager();
+            $post = $postManager->getPost($_GET['id']);
+           
+            if(!empty($post))
+            {
+                require('view/backend/adminUpdatePostView.php');
+            }
+            else
+            {
+                throw new Exception('l\'article selectionné n\'existe pas !');
+            }
+        }
+        else{
+            BackendController::adminListPosts();
+        }
+    }
+
     //Modification d'un post
     static function updatePost()
     {
-        session_start();
-        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+        if (isset($_GET['id']) && $_GET['id'] > 0){
 
+            $post = new Post(addslashes($_POST['author']), addslashes($_POST['title']), addslashes($_POST['comment']));
+            $Post->setId($_GET['id']);
+            var_dump($post);
+            die;
+            $postManager = new PostManager();
+            $updatedLines = $postManager->updatePost($post);
+            
+            header("Location: index.php?action=adminUpdatePost&id=".$post->getId());
 
         }
     }
@@ -171,7 +203,21 @@ class BackendController {
             $postManager = new PostManager();
             $postManager->deletePost($_GET['id']);
 
+            BackendController::adminListPosts();
+
         }
+        else{
+            ?>
+ 
+        <script type="text/javascript">
+         
+            alert("Vous devez être connecté en tant qu'administrateur pour pour effectuer cette action");
+            window.location = "http://localhost/PHP/projet4/index.php?action=adminListPosts"
+         
+        </script>
+         
+        <?php
+        } 
     }
 
     //Ajout d'un commentaire
@@ -222,19 +268,47 @@ class BackendController {
  
         <script type="text/javascript">
          
-        alert("Vous devez être connecter en tant qu'administrateur pour supprimer un commentaire");
+        alert("Vous devez être connecté en tant qu'administrateur pour pour effectuer cette action");
          
         </script>
          
         <?php
 
-        BackendController::adminListPosts();
+        header("index.php?action=moderation");
+        }  
+    }
+
+    static function keepComment()
+    {
+        session_start();
+        if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+
+            $commentManager = new CommentManager();
+            $commentManager->keepComment($_GET['id']);
+        
+        BackendController::getReportComments();
+        } 
+        else{
+            ?>
+ 
+        <script type="text/javascript">
+         
+        alert("Vous devez être connecté en tant qu'administrateur pour effectuer cette action");
+         
+        </script>
+         
+        <?php
+
+        header("index.php?action=moderation");
         }  
     }
 
     static function getReportComments()
     {
-        session_start();
+        if(!isset($_SESSION)){
+            session_start();
+        }
+
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             
             $commentManager = new CommentManager(); // Création d'un objet
@@ -247,7 +321,7 @@ class BackendController {
  
         <script type="text/javascript">
          
-        alert("Vous devez être connecter en tant qu'administrateur pour supprimer un commentaire");
+        alert("Vous devez être connecté en tant qu'administrateur pour supprimer un commentaire");
          
         </script>
          

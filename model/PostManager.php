@@ -60,4 +60,19 @@ class PostManager extends Manager
        
     }
 
+//Modifie un post
+public function updatePost(Post $post)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare("UPDATE post SET author = :author, title = :title, content = :content, creation_date = CURRENT_TIME WHERE id = :id");
+        $req->bindValue(':author', $post->getAuthor(), PDO::PARAM_STR);
+        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
+        $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
+       
+        $req->execute();
+
+        return $req->rowCount();
+    }
+
 }

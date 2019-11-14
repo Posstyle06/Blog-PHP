@@ -57,6 +57,14 @@ class CommentManager extends Manager
        
     }
 
+    public function keepComment($id)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare("UPDATE comments SET report = 0 WHERE id = '$id'");
+        $req->execute();
+       
+    }
+
     public function reportComment($idComment)
     {
         $db = $this->dbConnect();

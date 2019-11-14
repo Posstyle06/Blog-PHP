@@ -1,8 +1,8 @@
 <?php $title = htmlspecialchars($post['title']); ?>
 
 <?php ob_start(); ?>
- 
-<p><a href="index.php">Retour à la liste des billets</a></p>
+
+<p class="backToPosts"><a href="index.php">Retour à la liste des articles</a></p>
 
 <div class="news">
                         
@@ -11,11 +11,12 @@
     </h3>
                         
     <div class="postContent">
-    <?php echo stripslashes($post['content']); ?><br/><br/>                                  
+    <?php echo $post['content']; ?><br/><br/>                                  
     </div>
+
 </div>
 
-<h2>Commentaires</h2>
+<div class="titleComment">Commentaires</div>
 
 
 <?php
@@ -23,9 +24,9 @@
                 while ($donnees = $comments->fetch())
                 {
                 ?>
-                    <div style="border: black solid 1px; border-radius: 4px; width: 30%; word-wrap: break-word; padding-left: 5px" class="comm">
+                    <div class="commentBox">
                         
-                        <p style="font-weight: bold;">
+                        <p>
                             <?php echo htmlspecialchars ($donnees['author']." le ".$donnees['date']); ?> :
                         </p>
                         
@@ -33,11 +34,9 @@
                             <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
                                
                         </p>
-                        <?php $id=$donnees['id'];?>
-                        <a style="position: relative; left: 85%" class="report" href="http://localhost/PHP/projet4/index.php?action=reportComment&amp;id=<?php echo $id;?>">Signaler</a>
+                        <a style="position: relative; left: 85%" href="index.php?action=reportComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Signaler</a>
                         
                     </div>
-
                 <?php
                 }
 ?>

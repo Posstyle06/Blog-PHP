@@ -23,11 +23,11 @@
             <td><?php echo htmlspecialchars ($donnees['author']." le ".$donnees['date']); ?></td>
             <td><?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?></td>
             <td>
-                <form action="">
-                    <button type="button">Conserver</button>
+                <form action="index.php?action=keepComment&id=<?php echo $donnees['id'];?>" method="post">
+                    <button type="submit">Conserver</button>
                 </form><br/>
-                <form action="index.php?action=deleteComment&id=id=<?php echo $donnees['id'];?>" method="post">
-                    <button type="button">Supprimer</button>
+                <form action="index.php?action=deleteComment&id=<?php echo $donnees['id'];?>" method="post">
+                    <button type="submit">Supprimer</button>
                 </form>
             </td>
         </tr>

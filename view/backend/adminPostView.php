@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<h2>Commentaires</h2>
+<div class="titleComment">Commentaires</div>
 
 
 <?php
@@ -24,9 +24,9 @@
                 while ($donnees = $comments->fetch())
                 {
                 ?>
-                    <div style="border: black solid 1px; border-radius: 4px; width: 30%; word-wrap: break-word; padding-left: 5px" class="comm">
+                    <div class="commentBox">
                         
-                        <p style="font-weight: bold;">
+                        <p>
                             <?php echo htmlspecialchars ($donnees['author']." le ".$donnees['date']); ?> :
                         </p>
                         
@@ -34,7 +34,7 @@
                             <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
                                
                         </p>
-                        <a style="position: relative; left: 85%" href="index.php?action=adminComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Modifier</a>
+                        <a href="index.php?action=adminComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id']?>">Modifier</a>
                         
                     </div>
                 <?php
