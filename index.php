@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 function loadClass($class)
 {
     if (file_exists($class . '.php')) {
@@ -102,22 +102,10 @@ try
             FrontendController::addComment();
         }
 
-        //Affiche un commentaire pour modif
-        elseif ($_GET['action'] == 'Comment') 
-        { 
-            FrontendController::comment();
-        }
-
         //signaler un commentaire
         elseif ($_GET['action'] == 'reportComment') 
         { 
             FrontendController::reportComment();
-        }
-
-        //Affiche un commentaire pour modif en mode admin
-        elseif ($_GET['action'] == 'adminComment') 
-        { 
-            BackendController::adminComment();
         }
 
         //Supprime un commentaire
@@ -133,23 +121,9 @@ try
         }
 
         //Modifie le commentaire
-        elseif ($_GET['action'] == 'update') 
+        elseif ($_GET['action'] == 'error') 
         {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
-            {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) 
-                {
-                    BackendController::updateComment();
-                }
-                else
-                {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
-                }
-            }
-            else
-            {
-                BackendController::adminListPosts();
-            }
+            FrontendController::error();
         } 
 
         elseif ($_GET['action'] == 'moderation') 
@@ -167,3 +141,5 @@ try
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
 }
+
+

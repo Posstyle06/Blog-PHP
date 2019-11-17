@@ -40,6 +40,11 @@ class Post {
       return $this->creationDate;
     }
 
+    public function setId($id)
+    {
+      $this->id = $id;
+    }
+
     public function setAuthor($authorPost)
     {
     $this->authorPost = $authorPost;

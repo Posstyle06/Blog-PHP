@@ -1,5 +1,5 @@
 <?php
-class BackendController {
+class BackendController{
 
     //Connexion administrateur
     static function adminConnect()
@@ -7,7 +7,10 @@ class BackendController {
         // On vérifie que les champs pseudo et mdp sont renseignés    
         if (empty($_POST['pseudo']) || empty($_POST['pass'])) {
 
-            FrontendController::listPostsError();
+            $error= "Tous les champs ne sont pas remplis";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
+
 
         }
         else{
@@ -17,38 +20,21 @@ class BackendController {
             $memberManager = new MemberManager();
             $result = $memberManager->getMember($_POST['pseudo']);
 
-            $isPasswordCorrect = password_verify($pseudo, $result['pass']);
+            $isPasswordCorrect = password_verify($_POST['pass'], $result['pass']);
 
-            if ($result) {
+            if ($result && $isPasswordCorrect) {
            
-                if ($isPasswordCorrect OR htmlspecialchars($peudo===$result['pass'])) {
-                    session_start();
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['pseudo'] = $pseudo;
+                setcookie('pseudo', $_POST['pseudo'], time() + 365*24*3600, null, null, false, true);       
 
-                    if (isset($_POST['case'])) 
-                    {     
-                    $_SESSION['id'] = $result['id'];
-                    $_SESSION['pseudo'] = $pseudo;         
-                    setcookie('pseudo', $_POST['pseudo'], time() + 365*24*3600, null, null, false, true); 
-                    setcookie('pass', $result['pass'], time() + 365*24*3600, null, null, false, true); 
-
-                    require('view/backend/adminListPostsView.php');
-                    }
-                    else
-                    {
-                    $_SESSION['id'] = $result['id'];
-                    $_SESSION['pseudo'] = $pseudo;
-                    setcookie('pseudo','');
-                    setcookie('pass','');
-
-                    require('view/backend/adminListPostsView.php');
-                    }
-                }
-                else{
-                    throw new Exception("Identifiant ou mot de passe incorrect");      
-                }
+                require('view/backend/adminListPostsView.php');     
+                
             }
             else{
-                throw new Exception("Identifiant ou mot de passe incorrect");
+                $error= "Identifiant ou mot de passe incorrect";
+                $_SESSION['error'] = $error;
+                header("Location: index.php?action=error");
             }
         }
     }
@@ -56,8 +42,7 @@ class BackendController {
     //Déconnexion administrateur
     static function adminDisconnect()
     {
-        session_start();
-
+        
         // Suppression des variables de session et de la session
         $_SESSION = array();
         session_destroy();
@@ -73,9 +58,6 @@ class BackendController {
     //Récupère la list de tous les posts et l'affiche
     static function adminlistPosts()
     {
-        if(!isset($_SESSION)){
-            session_start();
-        }
 
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             
@@ -85,7 +67,9 @@ class BackendController {
             require('view/backend/adminListPostsView.php');
         }
         else{
-            echo "Vous devez être connecté pour accéder à cette page";
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }
     }
 
@@ -106,27 +90,34 @@ class BackendController {
             }
             else
             {
-                throw new Exception('l\'article selectionné n\'existe pas !');
+                $error= "l'article selectionné n'existe pas !";
+                $_SESSION['error'] = $error;
+                header("Location: index.php?action=error");
             }
         }
         else{
-            FrontendController::listPosts();
+            header('Location: index.php');
         }
     }
 
     //Aller à la vue de création d'un article
     static function newPost()
     {
-        session_start();
+        
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             require('view/backend/newPostView.php');
+        }
+        else{
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }
     }
 
     //Ajoute un poste
     static function addPost()
     {
-        session_start();
+        
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
 
             if (empty($_POST['author_post']) || empty($_POST['title']) || empty($_POST['content'])) {
@@ -140,7 +131,9 @@ class BackendController {
                 $affectedLines = $postManager->addPost($post); // Appel d'une fonction de cet objet
 
                 if ($affectedLines != 1) {
-                    throw new Exception('Impossible d\'ajouter l\'article !');    
+                    $error= "Impossible d'ajouter l'article !";
+                    $_SESSION['error'] = $error;
+                    header("Location: index.php?action=error");    
                 }
                 else 
                 {
@@ -150,7 +143,9 @@ class BackendController {
             }
         }
         else{
-            echo "Vous devez être connecté pour accéder à cette page";
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }
 
     }
@@ -169,11 +164,15 @@ class BackendController {
             }
             else
             {
-                throw new Exception('l\'article selectionné n\'existe pas !');
+                $error= "l'article selectionné n'existe pas !";
+                $_SESSION['error'] = $error;
+                header("Location: index.php?action=error");
             }
         }
         else{
-            BackendController::adminListPosts();
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }
     }
 
@@ -182,10 +181,8 @@ class BackendController {
     {
         if (isset($_GET['id']) && $_GET['id'] > 0){
 
-            $post = new Post(addslashes($_POST['author']), addslashes($_POST['title']), addslashes($_POST['comment']));
-            $Post->setId($_GET['id']);
-            var_dump($post);
-            die;
+            $post = new Post(addslashes($_POST['author_post']), addslashes($_POST['title']), addslashes($_POST['content']));
+            $post->setId($_GET['id']);
             $postManager = new PostManager();
             $updatedLines = $postManager->updatePost($post);
             
@@ -197,7 +194,7 @@ class BackendController {
     //Suppression d'un post
     static function deletePost()
     {
-        session_start();
+        
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
 
             $postManager = new PostManager();
@@ -207,55 +204,16 @@ class BackendController {
 
         }
         else{
-            ?>
- 
-        <script type="text/javascript">
-         
-            alert("Vous devez être connecté en tant qu'administrateur pour pour effectuer cette action");
-            window.location = "http://localhost/PHP/projet4/index.php?action=adminListPosts"
-         
-        </script>
-         
-        <?php
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         } 
     }
 
-    //Ajout d'un commentaire
-    static function adminComment()
-    {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
-
-            $commentManager = new CommentManager();
-            $comment = $commentManager->getSingleComment($_GET['id']);
-
-            if(!empty($comment))
-            {
-                require('view/backend/adminCommentView.php');
-            }
-            else
-            {
-                throw new Exception('l\'article selectionné n\'existe pas !');
-            }
-        }
-        else{
-            BackendController::adminListPosts();
-        }
-
-    }
-
-    static function updateComment()
-    {
-        $comment = new Comment($_GET['postId'], addslashes($_POST['author']), addslashes($_POST['comment']));
-        $comment->setId($_GET['id']);
-        $commentManager = new CommentManager();
-        $updatedLines = $commentManager->updateComment($comment);
-        
-        header("Location: index.php?action=adminComment&id=".$comment->getId()."&postId=".$_GET['postId']);
-    }
 
     static function deleteComment()
     {
-        session_start();
+        
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
 
             $commentManager = new CommentManager();
@@ -264,50 +222,32 @@ class BackendController {
         BackendController::getReportComments();
         } 
         else{
-            ?>
- 
-        <script type="text/javascript">
-         
-        alert("Vous devez être connecté en tant qu'administrateur pour pour effectuer cette action");
-         
-        </script>
-         
-        <?php
-
-        header("index.php?action=moderation");
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }  
     }
 
     static function keepComment()
     {
-        session_start();
+        
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
 
             $commentManager = new CommentManager();
             $commentManager->keepComment($_GET['id']);
         
-        BackendController::getReportComments();
+            BackendController::getReportComments();
         } 
         else{
-            ?>
- 
-        <script type="text/javascript">
-         
-        alert("Vous devez être connecté en tant qu'administrateur pour effectuer cette action");
-         
-        </script>
-         
-        <?php
-
-        header("index.php?action=moderation");
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }  
     }
 
     static function getReportComments()
     {
-        if(!isset($_SESSION)){
-            session_start();
-        }
+        
 
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             
@@ -317,18 +257,9 @@ class BackendController {
             require('view/backend/moderationView.php');
         }
         else{
-            ?>
- 
-        <script type="text/javascript">
-         
-        alert("Vous devez être connecté en tant qu'administrateur pour supprimer un commentaire");
-         
-        </script>
-         
-        <?php
-
-        BackendController::adminListPosts();
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }
     }
-
 }

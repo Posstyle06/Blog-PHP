@@ -34,7 +34,7 @@
                             <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
                                
                         </p>
-                        <a style="position: relative; left: 85%" href="index.php?action=reportComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Signaler</a>
+                        <a class="report" href="index.php?action=reportComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Signaler</a>
                         
                     </div>
                 <?php

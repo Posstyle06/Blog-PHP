@@ -1,13 +1,4 @@
-@font-face {
-    font-family: 'tusjbold';
-    src: url('../public/fonts/FFF_Tusj-webfont.eot');
-    src: url('../public/fonts/FFF_Tusj-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../public/fonts/FFF_Tusj-webfont.woff') format('woff'),
-         url('../public/fonts/FFF_Tusj-webfont.ttf') format('truetype'),
-         url('../public/fonts/FFF_Tusj-webfont.svg#fff_tusjbold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 body{
     background-image: url("../public/images/aurore.jpg");
@@ -20,7 +11,7 @@ body{
 }
 
 header{
-    font-family: 'tusjbold', serif, arial black;
+    font-family: 'Wallpoet', cursive;
     background-image: linear-gradient(to right, lightblue, white, lightblue);
     width: 100%;
     height: 200px;
@@ -91,11 +82,15 @@ nav li a{
 #connectForm{
     border: 2px double black;
     border-radius: 4px;
-    width: 265px;
+    width: 300px;
     padding: 10px;
     position: absolute;
     right: 1%;
     top: 13px;
+}
+
+#connexionError{
+    display: none;
 }
 
 #connectForm button, #disconnect{
@@ -172,7 +167,9 @@ h1{
 }
 
 #postForm{
-    margin-left: 10px;
+    width: 100%
+    margin-left: 100px;
+    text-align: center;
     
 }
 
@@ -198,6 +195,8 @@ h1{
 }
 
 .commentBox a{
+    position: relative; 
+    left: 85%;
     border: 1px solid black;
     border-radius: 4px;
     padding: 5px;
@@ -247,3 +246,28 @@ table td{
     padding: 10px;
 }
 
+/*VUE MESSAGE D ERREUR*/
+
+#errorMessage{
+    color: red;
+    font-size: 1.5em;
+    font-family: 'Wallpoet', cursive;
+    width: 20%;
+    border: 2px double white;
+    display: block;
+    margin: 20% auto;
+    text-align: center;
+    padding: 20px;
+}
+
+#errorMessage button{
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 20px;
+    background-image: linear-gradient(to right, lightblue, white, lightblue);
+}
+
+#errorMessage button:hover{
+    background-image: linear-gradient(to right, lightgreen, white, lightgreen);
+}

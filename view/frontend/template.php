@@ -9,6 +9,7 @@
               'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
               'save table directionality emoticons template paste'
             ],
+            toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify  |  numlist bullist checklist | forecolor casechange | emoticons | fullscreen  preview | showcomments addcomment',
             width: 600,
             height: 300,
             entity_encoding : "raw",
@@ -16,6 +17,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Wallpoet&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="favicon.png" /> 
         <title><?= $title ?></title>
         <meta name="description" content="Blog billet pour l'Alaska" />
@@ -26,9 +28,9 @@
 
         <form id="connectForm" action="index.php?action=connectAdmin" method="post">
             <span> Connexion administrateur</span><br/><br/>
+            <span id="connexionError">Tous les champs doivent être rmplis</span>
             <label for="pseudo">Votre pseudo</label>    <input type="text" name="pseudo" id="pseudo" value= "<?php if (isset ($_COOKIE['pseudo'])) echo htmlspecialchars($_COOKIE['pseudo']); ?>"/><br />
-            <label for="pass">Mot de passe</label>    <input type="password" name="pass" id="pass" value= "<?php if (isset ($_COOKIE['pass'])) echo htmlspecialchars($_COOKIE['pass']); ?>"/><br />
-            <label for="case">Connexion automatique</label> <input type="checkbox" name="case" checked="checked" id="case" /><br />
+            <label for="pass">Mot de passe</label>    <input type="password" name="pass" id="pass" value= ""/><br />
             <button id="Connexion" type="submit">Valider</button>
         </form>
 

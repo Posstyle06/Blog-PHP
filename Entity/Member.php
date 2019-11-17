@@ -10,8 +10,7 @@ class Member {
   private $isAdmin;
 
 	public function __construct($pseudo, $pass, $email) 
-    {
-      echo 'Voici le constructeur !'; 
+    { 
       $this->setPseudo($pseudo); 
       $this->setPass($pass); 
       $this->setEmail($email); 

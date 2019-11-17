@@ -34,7 +34,6 @@
                             <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
                                
                         </p>
-                        <a href="index.php?action=adminComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id']?>">Modifier</a>
                         
                     </div>
                 <?php
