@@ -28,11 +28,17 @@
 
         <form id="connectForm" action="index.php?action=connectAdmin" method="post">
             <span> Connexion administrateur</span><br/><br/>
-            <span id="connexionError">Tous les champs doivent être rmplis</span>
+            
             <label for="pseudo">Votre pseudo</label>    <input type="text" name="pseudo" id="pseudo" value= "<?php if (isset ($_COOKIE['pseudo'])) echo htmlspecialchars($_COOKIE['pseudo']); ?>"/><br />
             <label for="pass">Mot de passe</label>    <input type="password" name="pass" id="pass" value= ""/><br />
             <button id="Connexion" type="submit">Valider</button>
         </form>
+        <?php
+              if(isset($_SESSION['error'])) {
+               echo '<span id="connexionError">'.$_SESSION['error'].'</span>';
+               unset($_SESSION['error']);
+              }
+            ?>
 
         <h1>Billet pour l'Alaska</h1>
     </header>    

@@ -9,7 +9,7 @@ class BackendController{
 
             $error= "Tous les champs ne sont pas remplis";
             $_SESSION['error'] = $error;
-            header("Location: index.php?action=error");
+            header("Location: index.php?action=listPosts");
 
 
         }

@@ -8,7 +8,8 @@ class PostManager extends Manager
     public function getPosts()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, author, title, content, date_format(creation_date, "%d/%m/%Y à %Hh%i") AS date FROM posts ORDER BY id DESC LIMIT 5');
+        $req = $db->prepare('SELECT id, author, title, content, date_format(creation_date, "%d/%m/%Y à %Hh%i") AS date FROM posts ORDER BY id DESC LIMIT 5');
+        $req->execute();
         return $req;
 
         $req->closeCursor(); // Termine le traitement de la requête

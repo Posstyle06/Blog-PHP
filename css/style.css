@@ -14,7 +14,7 @@ header{
     font-family: 'Wallpoet', cursive;
     background-image: linear-gradient(to right, lightblue, white, lightblue);
     width: 100%;
-    height: 200px;
+    height: 210px;
     margin: 0;
     padding: 0;
     border-bottom: 2px solid black;
@@ -86,11 +86,17 @@ nav li a{
     padding: 10px;
     position: absolute;
     right: 1%;
-    top: 13px;
+    top: 10px;
 }
 
 #connexionError{
-    display: none;
+    font-family: cursive;
+    font-size: 0.9em;
+    color: red;
+    display: block;
+    position: absolute;
+    top: 190px;
+    right: 70px;
 }
 
 #connectForm button, #disconnect{
@@ -99,10 +105,6 @@ nav li a{
     padding: 5px;
     display: block;
     margin: 5px auto;
-}
-
-#connectForm span{
-    font-weight: bold;
 }
 
 #connectForm button:hover, #disconnect:hover{
@@ -171,6 +173,21 @@ h1{
     margin-left: 100px;
     text-align: center;
     
+}
+
+.backToPosts a{
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 5px;
+    background-image: linear-gradient(to right, lightgreen, white, lightgreen);
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.backToPosts a:hover{
+    background-image: linear-gradient(to right, lightblue, white, lightblue);
 }
 
 /*Commentaires*/
