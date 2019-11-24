@@ -24,8 +24,9 @@
     </head>
 
     <header>
+        <a id="displayConnectForm">Connexion<br/>administrateur</a>
         <a href="index.php"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
-
+        <h1>Billet pour l'Alaska</h1>
         <form id="connectForm" action="index.php?action=connectAdmin" method="post">
             <span> Connexion administrateur</span><br/><br/>
             
@@ -40,8 +41,7 @@
            unset($_SESSION['error']);
           }
         ?>
-
-        <h1>Billet pour l'Alaska</h1>
+        
     </header>    
 
     <body>

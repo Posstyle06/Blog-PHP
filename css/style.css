@@ -23,10 +23,14 @@ header{
 #adminHeader{
     background-image: linear-gradient(to right, lightblue, white, lightblue);
     width: 100%;
-    height: 230px;
+    height: 220px;
     margin: 0;
     padding: 0;
     border-bottom: 2px solid black;
+}
+
+#displayConnectForm{
+    display: none;
 }
 
 
@@ -89,6 +93,12 @@ input{
     border-radius: 4px;
     width: 300px;
     padding: 10px;
+    position: absolute;
+    right: 1%;
+    top: 10px;
+}
+
+#disconnectForm{
     position: absolute;
     right: 1%;
     top: 10px;
@@ -248,7 +258,7 @@ h1{
     background-image: linear-gradient(to right, lightblue, white, lightblue);
 }
 
-.titleComment, .newComment, .addNewPost{
+.titleComment, .newComment, .addNewPost, table caption{
     font-family: 'Wallpoet', cursive;
     width: 70%;
     font-size: 1.5em;
@@ -284,6 +294,8 @@ input{
 }
 
 .comment{
+    width: 90%;
+    height: 200px;
     border-radius: 4px;
 }
 
@@ -373,3 +385,127 @@ table td{
 #errorMessage button:hover{
     background-image: linear-gradient(to right, lightgreen, white, lightgreen);
 }
+
+/*Page de création d'un administrateur*/
+
+#registrationTitle{
+    text-align: center;
+}
+
+#pageContent{
+    background-color:rgb(188,254,188);
+}
+
+#pageContent form{
+    margin-left: 30%;
+    margin-right: 30%; 
+    padding: 10px; 
+    margin-top: 50px; 
+    margin-bottom: 50px; 
+    text-align: center; 
+    background-color: #CCCCCC
+}
+
+#registrationPass2{
+    position: relative; 
+    left: -44px
+}
+
+#registrationEmail{
+    position: relative; left: 5px
+}
+
+
+    /*-----MEDIA QUERIES SMARTPHONE------*/
+
+    @media screen and (max-width: 680px){
+    
+    header{
+        height: 130px;
+    }
+
+    #adminHeader{
+        height: 150px;
+    }
+
+    header h1{
+        font-size: 1.3em;
+    }
+
+    #logo{
+        width: 50px;
+    }
+
+    #displayConnectForm{
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 12px;
+        background-image: linear-gradient(to right, lightgreen, white, lightgreen);
+        text-align: center;
+        padding: 2px;
+        border:1px solid black;
+        border-radius: 4px;
+    }
+
+    #connectForm{
+        width: 100%;
+        display: none;
+        position: relative;
+        margin: auto;
+        background-image: linear-gradient(to right, lightgreen, white, lightgreen);
+    }
+
+    #disconnectForm{
+        border: none;
+        top: 5px;
+        right: 5px;
+        padding: 0;
+    }
+
+    #disconnect{
+        font-size: 0.5em;
+    }
+
+    header nav{
+        font-size:0.8em;
+    }
+
+    #hello{
+        font-size:0.6em;
+    }
+
+    .commentForm {
+        width: 90%;
+    }
+
+    .comment{
+        width: 90%;
+        height: 150px;
+    }
+
+    .news {
+        width: 90%;
+    }
+
+    .commentBox {
+        width: 70%;
+    }
+
+    .commentBox a{
+        left:75%;
+    }
+
+    }
+
+    
+    /*-----MEDIA QUERIES TABLETTE------*/
+
+    @media screen and (min-width: 681px) and (max-width: 1024px) {
+
+    #moderationTable{
+        width: 100%;
+    }
+
+    }

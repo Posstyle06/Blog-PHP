@@ -10,6 +10,14 @@ $(document).ready(function(){
 
 	});
 
+	//Affiche le formulaire de connection administrateur
+	$('#displayConnectForm').on("click", function(){
+		$('#connectForm').show();
+	});
 
+	//Cache le formulaire de connection administrateur
+	$('div').on("click", function(){
+		$('#connectForm').hide();
+	});
 
 })

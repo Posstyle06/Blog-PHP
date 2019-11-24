@@ -13,8 +13,8 @@ class BackendController{
         }
         else{
             $pseudo= $_POST['pseudo'];
-            $postManager = new PostManager(); // Création d'un objet
-            $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+            $postManager = new PostManager(); 
+            $posts = $postManager->getPosts(); 
             $memberManager = new MemberManager();
             $result = $memberManager->getMember($_POST['pseudo']);
 
@@ -47,20 +47,19 @@ class BackendController{
 
         // Suppression des cookies de connexion automatique
         setcookie('login', '');
-        setcookie('pass_hache', '');
         
         header('Location: index.php');
     }
 
 
-    //Récupère la list de tous les articles et l'affiche
+    //Récupère la liste de tous les articles et l'affiche
     static function adminlistPosts()
     {
 
         if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
             
-            $postManager = new PostManager(); // Création d'un objet
-            $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+            $postManager = new PostManager(); 
+            $posts = $postManager->getPosts(); 
 
             require('view/backend/adminListPostsView.php');
         }
@@ -71,7 +70,7 @@ class BackendController{
         }
     }
 
-    //Récupère un post et vérifie qu'il existe
+    //Récupère un article et vérifie qu'il existe
     static function adminPost()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) 
@@ -94,11 +93,13 @@ class BackendController{
             }
         }
         else{
-            header('Location: index.php');
+            $error= "Vous devez être connecté en tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }
     }
 
-    //Aller à la vue de création d'un article
+    //Aller à la vue de création d'un nouvel article
     static function newPost()
     {
         
@@ -106,7 +107,7 @@ class BackendController{
             require('view/backend/newPostView.php');
         }
         else{
-            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $error= "Vous devez être connecté en tant qu'administrateur pour accéder à cette page";
             $_SESSION['error'] = $error;
             header("Location: index.php?action=error");
         }
@@ -150,7 +151,7 @@ class BackendController{
 
     }
 
-    //Récupère un post pour modification
+    //Récupère un article pour modification
     static function adminUpdatePost()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0){
@@ -176,7 +177,7 @@ class BackendController{
         }
     }
 
-    //Modification d'un post
+    //Modification d'un article
     static function updatePost()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0){
@@ -187,11 +188,15 @@ class BackendController{
             $updatedLines = $postManager->updatePost($post);
             
             header("Location: index.php?action=adminUpdatePost&id=".$post->getId());
-
+        }
+        else{
+            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }
     }
 
-    //Suppression d'un post
+    //Suppression d'un article
     static function deletePost()
     {
         
@@ -210,7 +215,7 @@ class BackendController{
         } 
     }
 
-
+    //Suppression d'un commentaire (modération)
     static function deleteComment()
     {
         
@@ -228,6 +233,7 @@ class BackendController{
         }  
     }
 
+    //Conserver un commentaire (modération)
     static function keepComment()
     {
         
@@ -245,6 +251,7 @@ class BackendController{
         }  
     }
 
+    //Récupère les commentaires qui ont été signalés
     static function getReportComments()
     {
         
