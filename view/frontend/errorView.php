@@ -13,7 +13,10 @@
     
     <body>
         <div id="errorMessage">
-            ERREUR: <?php echo $_SESSION['error'];?>
+            ERREUR: <?php echo $_SESSION['error'];
+            unset($_SESSION['error']);
+            ?>
+
             <form action="../../index.php">
                 <button type="submit">Retour à la liste des articles</button>
             </form>

@@ -6,9 +6,10 @@ $(document).ready(function(){
 	});
 
 	$('#delete').on("click", function(){
-		return confirm("voulez vous vraiment signaler cet article ?");
+		return confirm("voulez vous vraiment supprimer cet article ?");
 
 	});
+
 
 
 })

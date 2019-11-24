@@ -24,7 +24,7 @@
     </head>
 
     <header>
-        <a href="http://localhost/PHP/projet4/index.php"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
+        <a href="index.php"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
 
         <form id="connectForm" action="index.php?action=connectAdmin" method="post">
             <span> Connexion administrateur</span><br/><br/>
@@ -33,12 +33,13 @@
             <label for="pass">Mot de passe</label>    <input type="password" name="pass" id="pass" value= ""/><br />
             <button id="Connexion" type="submit">Valider</button>
         </form>
+        
         <?php
-              if(isset($_SESSION['error'])) {
-               echo '<span id="connexionError">'.$_SESSION['error'].'</span>';
-               unset($_SESSION['error']);
-              }
-            ?>
+          if(isset($_SESSION['error'])) {
+           echo '<span id="connexionError">'.$_SESSION['error'].'</span>';
+           unset($_SESSION['error']);
+          }
+        ?>
 
         <h1>Billet pour l'Alaska</h1>
     </header>    

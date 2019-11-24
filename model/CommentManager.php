@@ -14,11 +14,11 @@ class CommentManager extends Manager
     public function getSingleComment($idComment)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM comments WHERE id = ? ');
+        $req = $db->prepare('SELECT id, post_id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM comments WHERE id = ? ');
         $req->execute(array($idComment));
-        $donnees = $req->fetch();
+        $datas = $req->fetch();
         $comment = new Comment();
-        $comment->hydrate($donnees);
+        $comment->hydrate($datas);
 
         return $comment;
     }
@@ -72,13 +72,6 @@ class CommentManager extends Manager
         
         $req->execute();
 
-        $req = $db->prepare('SELECT id, post_id, author, comment, report, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS date FROM comments WHERE id = ? ');
-        $req->execute(array($idComment));
-        $donnees = $req->fetch();
-        $comment = new Comment();
-        $comment->hydrate($donnees);
-
-        return $comment;
     }
 
     //récupère les commentaires signalés

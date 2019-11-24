@@ -18,40 +18,59 @@
 
 <div class="titleComment">Commentaires</div>
 
-
 <?php
-
-                while ($donnees = $comments->fetch())
-                {
-                ?>
-                    <div class="commentBox">
-                        
-                        <p>
-                            <?php echo htmlspecialchars ($donnees['author']." le ".$donnees['date']); ?> :
-                        </p>
-                        
-                        <p>
-                            <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
-                               
-                        </p>
-                        <a class="report" href="index.php?action=reportComment&amp;id=<?= $donnees['id'] ?>&amp;postId=<?= $donnees['post_id'] ?>">Signaler</a>
-                        
-                    </div>
-                <?php
-                }
+  if(isset($_SESSION['messageOk'])) {
+   echo '<span class="reportMessageOk">'.$_SESSION['messageOk'].'</span>';
+   unset($_SESSION['messageOk']);
+  }
+  if(isset($_SESSION['messageKo'])) {
+   echo '<span class="reportMessageKo">'.$_SESSION['messageKo'].'</span>';
+   unset($_SESSION['messageKo']);
+  }
 ?>
 
-<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+<?php
+         
+    while ($comment = $comments->fetch())
+    {
+
+    ?>
+        <div class="commentBox">
+            
+            <p>
+                <?php echo htmlspecialchars ($comment['author']." le ".$comment['date']); ?> :
+            </p>
+            
+            <p>
+                <?php echo nl2br(htmlspecialchars ($comment['comment'])); ?><br/><br/>
+                   
+            </p>
+            <a class="report" href="index.php?action=reportComment&amp;id=<?= $comment['id'] ?>&amp;postId=<?= $comment['post_id'] ?>">Signaler</a>
+            
+        </div>
+    <?php
+    }
+?>
+
+<div class="newComment">Ajouter un nouveau commentaire</div>
+
+<form class="commentForm" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+    <?php
+      if(isset($_SESSION['error'])) {
+       echo '<span id="emptyComment">'.$_SESSION['error'].'</span>';
+       unset($_SESSION['error']);
+      }
+    ?>
     <div>
-        <label for="author">Auteur</label><br />
+        <label for="author">Auteur</label><br /><br />
         <input type="text" id="author" name="author" />
     </div>
     <div>
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
+        <label for="comment">Commentaire</label><br /><br />
+        <textarea class="comment" name="comment" rows="10" cols="55"></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input class="validComment" type="submit" />
     </div>
 </form>
 

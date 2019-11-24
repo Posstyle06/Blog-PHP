@@ -13,7 +13,7 @@ class FrontendController {
     //Affiche la liste des poste avec un message d'erreur
     static function error()
     {
-        header("Location: http://localhost/PHP/projet4/view/frontend/errorView.php");
+        header("Location: view/frontend/errorView.php");
     }
 
 
@@ -55,8 +55,6 @@ class FrontendController {
                     $comment = new Comment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
                     $commentManager = new CommentManager();
                     $affectedLines = $commentManager->addComment($comment);
-                    //var_dump($affectedLines);
-                    //die;
 
                     if ($affectedLines != 1) {
                         $error= "Impossible d'ajouter le commentaire !";
@@ -72,7 +70,7 @@ class FrontendController {
                 {
                     $error= "Tous les champs doivent être remplis !";
                     $_SESSION['error'] = $error;
-                    header("Location: index.php?action=error");
+                    header('Location: index.php?action=post&id=' . $_GET['id']);
                 }
             }
             else {
@@ -89,24 +87,19 @@ class FrontendController {
         $commentManager = new CommentManager();
         $comment = $commentManager->reportComment($_GET['id']);
 
+        $comment = new Comment();
+        $comment = $commentManager->getSingleComment($_GET['id']);
+
         if ($comment->getReport() != 0) {
-
-            ?>
-     
-            <script type="text/javascript">
-
-            var variableRecuperee = <?php echo $comment->getPostId(); ?>;
-             
-            alert("le commentaire a bien été signalé à l administrateur");
-            window.location = "http://localhost/PHP/projet4/index.php?action=post&id="+variableRecuperee;
-             
-            </script>
-             
-            <?php
-
+            $messageOk= "le commentaire a été signalé avec succès !";
+            $_SESSION['messageOk'] = $messageOk;
+        }
+        else{
+            $message= "Nous n'avons pas réussi à signaler le commentaire !";
+            $_SESSION['messageKo'] = $messageKo;
         }
         
-        header('Location: index.php');
+        header('Location: index.php?action=post&id=' . $_GET['postId']);
     }
 
 }

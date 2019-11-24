@@ -18,8 +18,6 @@ function loadClass($class)
 
 spl_autoload_register('loadClass'); // On enregistre la fonction en autoload pour qu'elle soit appelée dès qu'on instanciera une classe non déclarée.
 
-try 
-{
 
     if (isset($_GET['action'])) 
     {
@@ -65,6 +63,7 @@ try
             BackendController::adminPost();
         } 
 
+        //Affiche la vue d'ajout d'un nouvel article
         elseif ($_GET['action'] == 'newPost') 
         {  
             BackendController::newPost();  
@@ -120,7 +119,7 @@ try
             BackendController::keepComment();
         }
 
-        //Modifie le commentaire
+        //Afiche un message d'erreur
         elseif ($_GET['action'] == 'error') 
         {
             FrontendController::error();
@@ -137,9 +136,6 @@ try
     {
         FrontendController::listPosts();
     }
-}
-catch(Exception $e) {
-    echo 'Erreur : ' . $e->getMessage();
-}
+
 
 

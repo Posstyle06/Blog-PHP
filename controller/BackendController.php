@@ -9,9 +9,7 @@ class BackendController{
 
             $error= "Tous les champs ne sont pas remplis";
             $_SESSION['error'] = $error;
-            header("Location: index.php?action=listPosts");
-
-
+            header("Location: index.php");
         }
         else{
             $pseudo= $_POST['pseudo'];
@@ -34,7 +32,7 @@ class BackendController{
             else{
                 $error= "Identifiant ou mot de passe incorrect";
                 $_SESSION['error'] = $error;
-                header("Location: index.php?action=error");
+                header("Location: index.php");
             }
         }
     }
@@ -55,7 +53,7 @@ class BackendController{
     }
 
 
-    //Récupère la list de tous les posts et l'affiche
+    //Récupère la list de tous les articles et l'affiche
     static function adminlistPosts()
     {
 
@@ -122,7 +120,9 @@ class BackendController{
 
             if (empty($_POST['author_post']) || empty($_POST['title']) || empty($_POST['content'])) {
 
-                FrontendController::listPostsError();
+                $error= "Tous les champs doivent être remplis !";
+                $_SESSION['error'] = $error;
+                header('Location: index.php?action=newPost');
             }
             else{
             
@@ -200,7 +200,7 @@ class BackendController{
             $postManager = new PostManager();
             $postManager->deletePost($_GET['id']);
 
-            BackendController::adminListPosts();
+            header("Location: index.php?action=adminListPosts");
 
         }
         else{
@@ -219,7 +219,7 @@ class BackendController{
             $commentManager = new CommentManager();
             $commentManager->deleteComment($_GET['id']);
         
-        BackendController::getReportComments();
+        header("Location: index.php?action=moderation");
         } 
         else{
             $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
@@ -236,7 +236,7 @@ class BackendController{
             $commentManager = new CommentManager();
             $commentManager->keepComment($_GET['id']);
         
-            BackendController::getReportComments();
+            header("Location: index.php?action=moderation");
         } 
         else{
             $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";

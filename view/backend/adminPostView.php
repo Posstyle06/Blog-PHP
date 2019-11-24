@@ -2,9 +2,6 @@
 
 <?php ob_start(); ?>
 
-
-<p><a href="index.php">Retour à la liste des billets</a></p>
-
 <div class="news">
                         
     <h3>
@@ -18,20 +15,30 @@
 
 <div class="titleComment">Commentaires</div>
 
+<?php
+  if(isset($_SESSION['messageOk'])) {
+   echo '<span class="reportMessageOk">'.$_SESSION['message'].'</span>';
+   unset($_SESSION['messageOk']);
+  }
+  if(isset($_SESSION['messageKo'])) {
+   echo '<span class="reportMessageKo">'.$_SESSION['message'].'</span>';
+   unset($_SESSION['messageKo']);
+  }
+?>
 
 <?php
 
-                while ($donnees = $comments->fetch())
+                while ($comment = $comments->fetch())
                 {
                 ?>
                     <div class="commentBox">
                         
                         <p>
-                            <?php echo htmlspecialchars ($donnees['author']." le ".$donnees['date']); ?> :
+                            <?php echo htmlspecialchars ($comment['author']." le ".$comment['date']); ?> :
                         </p>
                         
                         <p>
-                            <?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?><br/><br/>
+                            <?php echo nl2br(htmlspecialchars ($comment['comment'])); ?><br/><br/>
                                
                         </p>
                         
@@ -40,17 +47,19 @@
                 }
 ?>
 
-<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+<div class="newComment">Ajouter un nouveau commentaire</div>
+
+<form class="commentForm" action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
     <div>
-        <label for="author">Auteur</label><br />
+        <label for="author">Auteur</label><br /><br />
         <input type="text" id="author" name="author" />
     </div>
     <div>
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
+        <label for="comment">Commentaire</label><br /><br />
+        <textarea class="comment" name="comment" rows="10" cols="55"></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input class="validComment" type="submit" />
     </div>
 </form>
 

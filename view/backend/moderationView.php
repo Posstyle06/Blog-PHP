@@ -15,19 +15,19 @@
     <tbody>
         <?php
                
-                while ($donnees = $comments->fetch())
+                while ($datas = $comments->fetch())
                 {
                 ?>
         <tr>
-            <td id="postCol"><?php echo nl2br($donnees['content']); ?></td>
-            <td><?php echo htmlspecialchars ($donnees['author']." le ".$donnees['date']); ?></td>
-            <td><?php echo nl2br(htmlspecialchars ($donnees['comment'])); ?></td>
+            <td id="postCol"><?php echo nl2br($datas['content']); ?></td>
+            <td><?php echo htmlspecialchars ($datas['author']." le ".$datas['date']); ?></td>
+            <td><?php echo nl2br(htmlspecialchars ($datas['comment'])); ?></td>
             <td>
-                <form action="index.php?action=keepComment&id=<?php echo $donnees['id'];?>" method="post">
-                    <button type="submit">Conserver</button>
+                <form action="index.php?action=keepComment&id=<?php echo $datas['id'];?>" method="post">
+                    <button id="keepCommentButton" type="submit">Conserver</button>
                 </form><br/>
-                <form action="index.php?action=deleteComment&id=<?php echo $donnees['id'];?>" method="post">
-                    <button type="submit">Supprimer</button>
+                <form action="index.php?action=deleteComment&id=<?php echo $datas['id'];?>" method="post">
+                    <button id="deleteCommentButton" type="submit">Supprimer</button>
                 </form>
             </td>
         </tr>
