@@ -9,7 +9,7 @@
               'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
               'save table directionality emoticons template paste'
             ],
-            toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify  |  numlist bullist checklist | forecolor casechange | fullscreen  preview | showcomments addcomment',
+            toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify  |  numlist checklist | forecolor casechange | fullscreen  preview | showcomments addcomment',
             menubar:false,  
             height:400,
 
@@ -24,8 +24,9 @@
         <meta name="description" content="Blog billet pour l'Alaska" />
     </head>
 
+    <body>
+
     <header id="adminHeader">
-        <?session_start();?>
         <span id="hello"><?php echo 'Bonjour ' . $_SESSION['pseudo'];?></span>
 
         <a href="index.php?action=adminListPosts"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
@@ -43,7 +44,6 @@
         </nav>
     </header>    
 
-    <body>
         <?= $content ?>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"

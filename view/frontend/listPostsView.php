@@ -15,7 +15,9 @@ while ($donnees = $posts->fetch())
         <div class="postContent">
             <?php echo nl2br(stripslashes($donnees['content'])); ?><br/><br/>
             <?php $postId=$donnees['id'];?>
-            <a href="index.php?action=post&amp;id=<?php echo $postId;?>">Commentaires</a>          
+            <div class="postContentButtons">
+                <a href="index.php?action=post&amp;id=<?php echo $postId;?>">Commentaires</a> 
+            </div>         
         </div>
         
     </div>

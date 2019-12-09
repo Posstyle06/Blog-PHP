@@ -1,68 +1,45 @@
-<?php $title = "Billet pour l'Alaska"; ?>
+    <?php $title = "Billet pour l'Alaska";
 
-<?php ob_start(); ?>
-
-<table border="1" id="moderationTable">
-    <caption>Commentaires signalés</caption>
-    <thead>
-        <tr>
-            <th>Article</th>
-            <th>Auteur / date</th>
-            <th>Commentaire</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-               
-                while ($datas = $comments->fetch())
-                {
+    ob_start(); ?>
+    
+    <table id="moderationTable">
+        <caption>Commentaires signalés</caption>
+        <thead>
+            <tr>
+                <th class="postColumnTitle">Article</th>
+                <th class="authorColumnTitle">Auteur / date</th>
+                <th class="commentColumnTitle">Commentaire</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                    
+                    while ($datas = $comments->fetch())
+                    {
+                        ?>
+                        <tr>
+                            <td class="postColumn"><?php echo nl2br(stripslashes($datas['content'])); ?></td>
+                            <td class="authorColumn"><?php echo htmlspecialchars ($datas['author']." le ".$datas['date']); ?></td>
+                            <td class="commentColumn">
+                                <?php echo nl2br(htmlspecialchars ($datas['comment'])); ?>
+                                <span class="postLink"><br/><a href="index.php?action=adminPost&amp;id=<?php echo $datas[0];?>"><br/>Voir l'article concerné</a></span>
+                            </td>
+                            <td>
+                                <form action="index.php?action=keepComment&id=<?php echo $datas['id'];?>" method="post">
+                                    <button id="keepCommentButton" type="submit">Conserver</button>
+                                </form><br/>
+                                <form action="index.php?action=deleteComment&id=<?php echo $datas['id'];?>" method="post">
+                                    <button id="deleteCommentButton" type="submit">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php
+                    }
                     ?>
-                    <tr>
-                        <td id="postCol"><?php echo nl2br($datas['content']); ?></td>
-                        <td><?php echo htmlspecialchars ($datas['author']." le ".$datas['date']); ?></td>
-                        <td><?php echo nl2br(htmlspecialchars ($datas['comment'])); ?></td>
-                        <td>
-                            <form action="index.php?action=keepComment&id=<?php echo $datas['id'];?>" method="post">
-                                <button id="keepCommentButton" type="submit">Conserver</button>
-                            </form><br/>
-                            <form action="index.php?action=deleteComment&id=<?php echo $datas['id'];?>" method="post">
-                                <button id="deleteCommentButton" type="submit">Supprimer</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <?php
-                }
-                ?>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    
+    <?php $content = ob_get_clean(); ?>
 
-<div id="smartphoneView">
-    <?php
-    while ($datas = $comments->fetch())
-    {
-        ?>
-        
-            <?php echo nl2br($datas['content']); ?>
-            <?php echo htmlspecialchars ($datas['author']." le ".$datas['date']); ?>
-            <?php echo nl2br(htmlspecialchars ($datas['comment'])); ?>
-            
-                <form action="index.php?action=keepComment&id=<?php echo $datas['id'];?>" method="post">
-                    <button id="keepCommentButton" type="submit">Conserver</button>
-                </form><br/>
-                <form action="index.php?action=deleteComment&id=<?php echo $datas['id'];?>" method="post">
-                    <button id="deleteCommentButton" type="submit">Supprimer</button>
-                </form>
-            
-        
-        <?php
-    }
-    ?>
-</div>
-
-
-
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require('template.php'); ?>
+    <?php require('template.php'); ?>

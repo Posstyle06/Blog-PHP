@@ -16,11 +16,9 @@
             ERREUR: <?php echo $_SESSION['error'];
             unset($_SESSION['error']);
             ?>    
-                <form action="../../index.php">
+                <form action="../../index.php?action=adminListPosts">
                     <button type="submit">Retour à la liste des articles</button>
                 </form>
         </div>
     </body>
 </html>
-
-

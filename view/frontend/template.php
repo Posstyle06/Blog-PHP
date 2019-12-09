@@ -22,7 +22,7 @@
         <title><?= $title ?></title>
         <meta name="description" content="Blog billet pour l'Alaska" />
     </head>
-
+    <body>
     <header>
         <a id="displayConnectForm">Connexion<br/>administrateur</a>
         <a href="index.php"><img id="logo" src="public/images/logo_livre.PNG" alt="logo livre"/></a>
@@ -40,16 +40,14 @@
            echo '<span id="connexionError">'.$_SESSION['error'].'</span>';
            unset($_SESSION['error']);
           }
-        ?>
-        
+        ?>       
     </header>    
 
-    <body>
         <?= $content ?>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
-    <script src="public/js/actions.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+        <script src="public/js/actions.js"></script>
     </body>
 </html>

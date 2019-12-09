@@ -11,7 +11,7 @@
     </h3>
                         
     <div class="postContent">
-    <?php echo $post['content']; ?><br/><br/>                                  
+    <?php echo stripslashes($post['content']); ?><br/><br/>                                  
     </div>
 
 </div>
@@ -67,7 +67,7 @@
     </div>
     <div>
         <label for="comment">Commentaire</label><br /><br />
-        <textarea class="comment" name="comment"></textarea>
+        <textarea class="comment" id="comment" name="comment"></textarea>
     </div>
     <div>
         <input class="validComment" type="submit" />

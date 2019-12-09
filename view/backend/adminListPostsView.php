@@ -3,22 +3,22 @@
 <?php ob_start(); ?>
 
 <?php
-while ($donnees = $posts->fetch())
+while ($datas = $posts->fetch())
 {
 ?>
     <div class="news">
         
         <h3>
-            <?php echo htmlspecialchars ($donnees['title']." Posté par ".$donnees['author']." le ".$donnees['date']); ?> :
+            <?php echo htmlspecialchars ($datas['title']." Posté par ".$datas['author']." le ".$datas['date']); ?> :
         </h3>
         
         <div class="postContent">
-            <?php echo nl2br(stripslashes($donnees['content'])); ?><br/><br/>
-            <?php $postId=$donnees['id'];?>
+            <?php echo nl2br(stripslashes($datas['content'])); ?><br/><br/>
+            <?php $postId=$datas['id'];?>
             <div class="postContentButtons">
                 <a href="index.php?action=adminPost&amp;id=<?php echo $postId;?>">Commentaires</a>
                 <a href="index.php?action=adminUpdatePost&amp;id=<?php echo $postId;?>">Modifier</a>
-                <a id="delete" href="index.php?action=deletePost&amp;id=<?php echo $postId;?>">Supprimer</a> 
+                <a class="delete" href="index.php?action=deletePost&amp;id=<?php echo $postId;?>">Supprimer</a> 
             </div>        
         </div>
         

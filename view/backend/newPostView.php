@@ -17,7 +17,7 @@
     	<input type="text" name="author_post" id="author_post"/></p>
     <p><label for="title">Titre du post</label><br/><br/>  
     	<input type="text" name="title" id="title"/></p>
-    <p><label for="content">Rédigez votre article</label><br/><br/>
+    <p><label for="adminContent">Rédigez votre article</label><br/><br/>
     	<textarea name="content" id="adminContent"></textarea></p>
     <p><input id="submitPost" type="submit" name="newpost" value="Valider" /></p>
 
