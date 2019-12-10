@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="../css/style.css" />
         <title>Site</title>
     </head>
     <h1 id="registrationTitle">Inscription</h1>
@@ -10,7 +10,7 @@
     <body>
         <div id="pageContent"> 
 
-        <form action="registration_post.php" method="post">
+        <form class="registrationForm" action="registration_post.php" method="post">
         <p>
             <label for="pseudo">Votre pseudo</label> : <input type="text" name="pseudo" id="pseudo"/><br />
             <p><label for="pass">Mot de passe</label> : <input type="password" name="pass" id="pass"/><br /></p>

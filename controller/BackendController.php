@@ -21,7 +21,8 @@ class BackendController{
             $isPasswordCorrect = password_verify($_POST['pass'], $result['pass']);
 
             if ($result && $isPasswordCorrect) {
-           
+                
+                //Initialisation d'une session
                 $_SESSION['id'] = $result['id'];
                 $_SESSION['pseudo'] = $pseudo;
                 setcookie('pseudo', $_POST['pseudo'], time() + 365*24*3600, null, null, false, true);       
@@ -113,7 +114,7 @@ class BackendController{
         }
     }
 
-    //Ajoute un poste
+    //Ajoute un article
     static function addPost()
     {
         
@@ -128,8 +129,8 @@ class BackendController{
             else{
             
                 $post = new Post($_POST['author_post'], addslashes($_POST['title']), addslashes($_POST['content']));
-                $postManager = new PostManager(); // Création d'un objet
-                $affectedLines = $postManager->addPost($post); // Appel d'une fonction de cet objet
+                $postManager = new PostManager(); 
+                $affectedLines = $postManager->addPost($post);
 
                 if ($affectedLines != 1) {
                     $error= "Impossible d'ajouter l'article !";
@@ -144,7 +145,7 @@ class BackendController{
             }
         }
         else{
-            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $error= "Vous devez être connecté en tant qu'administrateur pour accéder à cette page";
             $_SESSION['error'] = $error;
             header("Location: index.php?action=error");
         }
@@ -171,7 +172,7 @@ class BackendController{
             }
         }
         else{
-            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $error= "l'article selectionné n'existe pas !";
             $_SESSION['error'] = $error;
             header("Location: index.php?action=error");
         }
@@ -190,7 +191,7 @@ class BackendController{
             header("Location: index.php?action=adminUpdatePost&id=".$post->getId());
         }
         else{
-            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $error= "l'article selectionné n'existe pas !";
             $_SESSION['error'] = $error;
             header("Location: index.php?action=error");
         }
@@ -245,7 +246,7 @@ class BackendController{
             header("Location: index.php?action=moderation");
         } 
         else{
-            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $error= "Vous devez être connecté en tant qu'administrateur pour accéder à cette page";
             $_SESSION['error'] = $error;
             header("Location: index.php?action=error");
         }  
@@ -264,7 +265,7 @@ class BackendController{
             require('view/backend/moderationView.php');
         }
         else{
-            $error= "Vous devez être connectéen tant qu'administrateur pour accéder à cette page";
+            $error= "Vous devez être connecté en tant qu'administrateur pour accéder à cette page";
             $_SESSION['error'] = $error;
             header("Location: index.php?action=error");
         }

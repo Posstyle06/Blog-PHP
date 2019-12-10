@@ -27,10 +27,10 @@
                             </td>
                             <td>
                                 <form action="index.php?action=keepComment&id=<?php echo $datas['id'];?>" method="post">
-                                    <button id="keepCommentButton" type="submit">Conserver</button>
+                                    <button class="keepCommentButton" type="submit">Conserver</button>
                                 </form><br/>
                                 <form action="index.php?action=deleteComment&id=<?php echo $datas['id'];?>" method="post">
-                                    <button id="deleteCommentButton" type="submit">Supprimer</button>
+                                    <button class="deleteCommentButton" type="submit">Supprimer</button>
                                 </form>
                             </td>
                         </tr>

@@ -2,7 +2,7 @@
 
 class MemberManager extends Manager
 {
-
+	//Récupère les infos d'un membre
 	public function getMember($pseudo)
 	{
 

@@ -2,9 +2,8 @@
 
 class PostManager extends Manager
 {
-    
-//récupère la liste des posts
-
+        
+    //récupère la liste des articles
     public function getPosts()
     {
         $db = $this->dbConnect();
@@ -15,8 +14,7 @@ class PostManager extends Manager
         $req->closeCursor(); // Termine le traitement de la requête
     }
 
-//Récupère un post
-
+    //Récupère un article précis
     public function getPost($postId)
     {
         $db = $this->dbConnect();
@@ -29,8 +27,7 @@ class PostManager extends Manager
         $req->closeCursor(); // Termine le traitement de la requête
     }
 
-//Ajoute un post
-
+    //Ajoute un article
     public function addPost(Post $post)
     {
         $a=$post->getAuthorPost();
@@ -48,8 +45,7 @@ class PostManager extends Manager
 
     }
 
-//Récupère un post
-
+    //Supprime un article
     public function deletePost($postId)
     {
         $db = $this->dbConnect();
@@ -61,8 +57,8 @@ class PostManager extends Manager
        
     }
 
-//Modifie un post
-public function updatePost(Post $post)
+    //Modifie un article
+    public function updatePost(Post $post)
     {
         $db = $this->dbConnect();
         $req = $db->prepare("UPDATE posts SET author = :author, title = :title, content = :content, creation_date = CURRENT_TIME WHERE id = :id");

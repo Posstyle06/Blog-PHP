@@ -2,6 +2,7 @@
 
 class CommentManager extends Manager
 {
+    //Récupère l'ensemble des commentaires d'un article
     public function getComments($postId)
     {
         $db = $this->dbConnect();
@@ -11,6 +12,7 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    //Récupère un commentaire précis
     public function getSingleComment($idComment)
     {
         $db = $this->dbConnect();
@@ -23,6 +25,7 @@ class CommentManager extends Manager
         return $comment;
     }
 
+    //Ajout d'un commentaire
     public function addComment(Comment $comment)
     {
         
@@ -36,6 +39,7 @@ class CommentManager extends Manager
         return $req->rowCount();
     }
 
+    //Modification d'un commentaire
     public function updateComment(Comment $comment)
     {
         $db = $this->dbConnect();
@@ -49,6 +53,7 @@ class CommentManager extends Manager
         return $req->rowCount();
     }
 
+    //Supprimer le commentaire qui a été signalé
     public function deleteComment($id)
     {
         $db = $this->dbConnect();
@@ -57,6 +62,7 @@ class CommentManager extends Manager
        
     }
 
+    //Conserver le commentaire qui a été signalé
     public function keepComment($id)
     {
         $db = $this->dbConnect();
@@ -65,6 +71,7 @@ class CommentManager extends Manager
        
     }
 
+    //Signaler un commentaire
     public function reportComment($idComment)
     {
         $db = $this->dbConnect();

@@ -31,7 +31,7 @@ header{
 }
 
 #displayConnectForm{
-    display: none;
+    
 }
 
 
@@ -88,9 +88,28 @@ input{
     padding-top: 10px;
 }
 
+#displayConnectForm{
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 15px;
+    background-image: linear-gradient(to right, lightgreen, white, lightgreen);
+    text-align: center;
+    padding: 2px;
+    border:1px solid black;
+    border-radius: 4px;
+}
+
+#displayConnectForm:hover{
+    cursor: pointer;
+}
+
 #connectForm{
+    display: none;
     border: 2px double black;
     border-radius: 4px;
+    background-image: linear-gradient(to right, lightblue, white, lightblue);
     width: 300px;
     padding: 10px;
     position: absolute;
@@ -114,7 +133,7 @@ input{
     right: 60px;
 }
 
-#connectForm button, #disconnect, .validComment, #keepCommentButton, #deleteCommentButton, #submitPost{
+#connectForm button, #disconnect, .validComment, .keepCommentButton, .deleteCommentButton, #submitPost{
     background-color: lightgreen;
     border-radius: 4px; 
     padding: 5px;
@@ -122,7 +141,7 @@ input{
     margin: 5px auto;
 }
 
-#connectForm button:hover, #disconnect:hover, .validComment:hover, #keepCommentButton:hover, #deleteCommentButton:hover, #submitPost:hover{
+#connectForm button:hover, #disconnect:hover, .validComment:hover, .keepCommentButton:hover, .deleteCommentButton:hover, #submitPost:hover{
     background-image: linear-gradient(to right, lightblue, white, lightblue);
 }
 
@@ -423,6 +442,11 @@ table td{
     position: relative; left: 5px
 }
 
+/*formulaire de création d'un membre*/
+.registrationForm{
+    background-image: linear-gradient(to right, lightblue, white, lightblue);
+}
+
 
     /*-----MEDIA QUERIES SMARTPHONE------*/
 
@@ -445,16 +469,10 @@ table td{
     }
 
     #displayConnectForm{
-        display: block;
-        position: absolute;
         top: 5px;
         right: 5px;
         font-size: 12px;
-        background-image: linear-gradient(to right, lightgreen, white, lightgreen);
-        text-align: center;
         padding: 2px;
-        border:1px solid black;
-        border-radius: 4px;
     }
 
     #connectForm{

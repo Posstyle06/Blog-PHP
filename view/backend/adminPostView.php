@@ -56,7 +56,7 @@
     </div>
     <div>
         <label for="comment">Commentaire</label><br /><br />
-        <textarea class="comment" name="comment" rows="10" cols="55"></textarea>
+        <textarea class="comment" id="comment" name="comment" rows="10" cols="55"></textarea>
     </div>
     <div>
         <input class="validComment" type="submit" />
