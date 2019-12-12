@@ -64,7 +64,12 @@ class FrontendController {
                 }
                 else 
                 {
-                    header('Location: index.php?action=post&id=' . $comment->getPostId());
+                    if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+                        header('Location: index.php?action=adminPost&id=' . $comment->getPostId());
+                    }
+                    else{
+                        header('Location: index.php?action=post&id=' . $comment->getPostId());
+                    }
                 }
             }
             else 

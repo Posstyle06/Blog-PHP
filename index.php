@@ -23,18 +23,14 @@ spl_autoload_register('loadClass'); // On enregistre la fonction en autoload pou
     {
         //connexion administrateur
         if ($_GET['action'] == 'connectAdmin')
-        {
-            
-            BackendController::adminConnect(); 
-            
+        {   
+            BackendController::adminConnect();   
         } 
 
         //déconnexion administrateur
         elseif ($_GET['action'] == 'disconnectAdmin')
-        {
-            
-            BackendController::adminDisconnect(); 
-            
+        {   
+            BackendController::adminDisconnect();     
         }   
 
         //ACTIONS SUR LES POSTS
@@ -125,6 +121,7 @@ spl_autoload_register('loadClass'); // On enregistre la fonction en autoload pou
             FrontendController::error();
         } 
 
+        //Récupère la liste des commentaires signlés
         elseif ($_GET['action'] == 'moderation') 
         {
             BackendController::getReportComments();

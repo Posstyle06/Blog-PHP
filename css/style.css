@@ -442,11 +442,6 @@ table td{
     position: relative; left: 5px
 }
 
-/*formulaire de création d'un membre*/
-.registrationForm{
-    background-image: linear-gradient(to right, lightblue, white, lightblue);
-}
-
 
     /*-----MEDIA QUERIES SMARTPHONE------*/
 

@@ -10,6 +10,11 @@ $(document).ready(function(){
 
 	});
 
+	$('.deleteCommentButton').on("click", function(){
+		return confirm("voulez vous vraiment supprimer ce commentaire ?");
+
+	});
+
 	//Affiche le formulaire de connection administrateur
 	$('#displayConnectForm').on("click", function(){
 		$('#connectForm').show();
