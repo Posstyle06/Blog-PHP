@@ -8,7 +8,7 @@ class Post {
 	private $creationDate;
 	private $content;
 
-	public function __construct($authorPost, $title, $content) 
+	public function __construct($authorPost="", $title="", $content="") 
     {
       $this->setAuthor($authorPost); 
       $this->setTitle($title); 
@@ -38,6 +38,11 @@ class Post {
     public function getCreationDate()
     {
       return $this->creationDate;
+    }
+
+    public function setId($id)
+    {
+      $this->id = $id;
     }
 
     public function setAuthor($authorPost)

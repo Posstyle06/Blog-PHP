@@ -1,114 +1,110 @@
 <?php
 class FrontendController {
 
-//Récupère la list de tous les posts et l'affiche
-static function listPosts()
-{
-    $postManager = new PostManager(); // Création d'un objet
-    $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
-
-    require('view/frontend/listPostsView.php');
-}
-
-//Affiche la liste des poste avec un message d'erreur
-static function listPostsError()
-{
-    $postManager = new PostManager(); // Création d'un objet
-    $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
-
-    require('view/frontend/listPostsViewError.php');
-}
-
-
-//Récupère un post et vérifie qu'il existe
-static function post()
-{
-    if (isset($_GET['id']) && $_GET['id'] > 0) 
+    //Récupère la liste de tous les articles et l'affiche
+    static function listPosts()
     {
-        $postManager = new PostManager();
-        $commentManager = new CommentManager();
+        $postManager = new PostManager(); 
+        $posts = $postManager->getPosts(); 
 
-        $post = $postManager->getPost($_GET['id']);
-        $comments = $commentManager->getComments($_GET['id']);
-
-        if(!empty($post))
-        {
-            require('view/frontend/postView.php');
-        }
-        else
-        {
-            throw new Exception('l\'article selectionné n\'existe pas !');
-        }
+        require('view/frontend/listPostsView.php');
     }
-    else{
-        FrontendController::listPosts();
-    }
-}
 
-//Ajoute un commentaire
-static function addComment()
-{
-    if (isset($_GET['id']) && $_GET['id'] > 0) 
+    //Affiche une page avec l'erreur récupérée
+    static function error()
+    {
+        header("Location: view/frontend/errorView.php");
+    }
+
+
+    //Récupère un article et vérifie qu'il existe
+    static function post()
+    {
+        if (isset($_GET['id']) && $_GET['id'] > 0) 
         {
-            if (!empty($_POST['author']) && !empty($_POST['comment'])) 
+            $postManager = new PostManager();
+            $commentManager = new CommentManager();
+
+            $post = $postManager->getPost($_GET['id']);
+            $comments = $commentManager->getComments($_GET['id']);
+
+            if(!empty($post))
             {
+                require('view/frontend/postView.php');
+            }
+            else
+            {
+                $error= "l'article selectionné n'existe pas !";
+                $_SESSION['error'] = $error;
+                header("Location: index.php?action=error");
+            }
+        }
+        else{
+            $error= "l'article selectionné n'existe pas !";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
+        }
+    }
+
+    //Ajoute un commentaire
+    static function addComment()
+    {
+        if (isset($_GET['id']) && $_GET['id'] > 0) 
+        {
+            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                 
                 $comment = new Comment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
-                var_dump($comment);
-                die();
                 $commentManager = new CommentManager();
                 $affectedLines = $commentManager->addComment($comment);
 
                 if ($affectedLines != 1) {
-                    throw new Exception('Impossible d\'ajouter le commentaire !');    
+                    $error= "Impossible d'ajouter le commentaire !";
+                    $_SESSION['error'] = $error;
+                    header("Location: index.php?action=error");    
                 }
                 else 
                 {
-                    header('Location: index.php?action=post&id=' . $comment->getPostId());
+                    if (isset($_SESSION['id']) AND isset($_SESSION['pseudo'])){
+                        header('Location: index.php?action=adminPost&id=' . $comment->getPostId());
+                    }
+                    else{
+                        header('Location: index.php?action=post&id=' . $comment->getPostId());
+                    }
                 }
             }
             else 
             {
-                throw new Exception('Tous les champs ne sont pas remplis !');
+                $error= "Tous les champs doivent être remplis !";
+                $_SESSION['error'] = $error;
+                header('Location: index.php?action=post&id=' . $_GET['id']);
             }
         }
         else {
-            throw new Exception('Aucun identifiant de billet envoyé');
+            $error= "Aucun identifiant d'article envoyé !";
+            $_SESSION['error'] = $error;
+            header("Location: index.php?action=error");
         }  
-    
-}
-
-static function comment()
-{
-    
-
-    $commentManager = new CommentManager();
-    $comment = $commentManager->getSingleComment($_GET['id']);
-
-    if(!empty($comment))
-    {
-        require('view/frontend/CommentView.php');
-    }
-    else
-    {
-        throw new Exception('l\'article selectionné n\'existe pas !');
     }
 
-}
+    //Signalement d'un commentaire
+    static function reportComment()
+    {
+        $commentManager = new CommentManager();
+        $comment = $commentManager->reportComment($_GET['id']);
 
+        $comment = new Comment();
+        $comment = $commentManager->getSingleComment($_GET['id']);
 
-static function updateComment($idComment, $author, $newcomment)
-{
-    
-
-    $commentManager = new CommentManager();
-    $comment = $commentManager->updateComment($idComment, $author, $newcomment);
-    $comment = $commentManager->getSingleComment($idComment);
-
-   
-    require('view/frontend/CommentView.php');
-    
-
-}
+        if ($comment->getReport() != 0) {
+            $messageOk= "le commentaire a été signalé avec succès !";
+            $_SESSION['messageOk'] = $messageOk;
+        }
+        else{
+            $message= "Nous n'avons pas réussi à signaler le commentaire !";
+            $_SESSION['messageKo'] = $messageKo;
+        }
+        
+        header('Location: index.php?action=post&id=' . $_GET['postId']);
+    }
 
 }

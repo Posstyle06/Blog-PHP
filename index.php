@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 function loadClass($class)
 {
     if (file_exists($class . '.php')) {
@@ -18,32 +18,28 @@ function loadClass($class)
 
 spl_autoload_register('loadClass'); // On enregistre la fonction en autoload pour qu'elle soit appelée dès qu'on instanciera une classe non déclarée.
 
-try 
-{
 
     if (isset($_GET['action'])) 
     {
+        //connexion administrateur
+        if ($_GET['action'] == 'connectAdmin')
+        {   
+            BackendController::adminConnect();   
+        } 
 
-        if ($_GET['action'] == 'listPosts') 
+        //déconnexion administrateur
+        elseif ($_GET['action'] == 'disconnectAdmin')
+        {   
+            BackendController::adminDisconnect();     
+        }   
+
+        //ACTIONS SUR LES POSTS
+
+        //Récupération de la liste des posts
+        elseif ($_GET['action'] == 'listPosts') 
         {
             FrontendController::listPosts();
-        }
-
-        //connexion administrateur
-        elseif ($_GET['action'] == 'connectAdmin') 
-        {
-            
-            BackendController::adminConnect(); 
-            
-        }  
-
-        //Ajout d'un post
-        elseif ($_GET['action'] == 'addpost') 
-        {
-            
-            BackendController::addPost(); 
-            
-        }  
+        } 
 
         //Selection d'un post avec ses commentaires
         elseif ($_GET['action'] == 'post') 
@@ -51,51 +47,92 @@ try
             FrontendController::post();
         }  
 
+        //Revenir sur la liste des post en mode Administrateur
+        elseif ($_GET['action'] == 'adminListPosts') 
+        {
+            BackendController::adminListPosts();
+        } 
+
+        //Selection d'un post avec ses commentaires en mode admin
+        elseif ($_GET['action'] == 'adminPost') 
+        {
+            BackendController::adminPost();
+        } 
+
+        //Affiche la vue d'ajout d'un nouvel article
+        elseif ($_GET['action'] == 'newPost') 
+        {  
+            BackendController::newPost();  
+        } 
+
+        //Ajout d'un post
+        elseif ($_GET['action'] == 'addpost') 
+        {  
+            BackendController::addPost();  
+        } 
+
+        //Affiche un post pour modif en mode admin
+        elseif ($_GET['action'] == 'adminUpdatePost') 
+        {  
+            BackendController::adminUpdatePost();  
+        }  
+
+        //Modifier un post
+        elseif ($_GET['action'] == 'updatePost') 
+        {  
+            BackendController::updatePost();  
+        }  
+
+        //Supprimer un post
+        elseif ($_GET['action'] == 'deletePost') 
+        {  
+            BackendController::deletePost();  
+        }        
+
+        //ACTIONS SUR LES COMMENTAIRES
+
         //Ajout d'un commentaire
         elseif ($_GET['action'] == 'addComment') 
         {
             FrontendController::addComment();
         }
 
-        //Affiche un commentaire pour modif
-        elseif ($_GET['action'] == 'Comment') 
-        {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
-            {
-                FrontendController::comment();
-            }
-            else
-            {
-                FrontendController::listPosts();
-            }
-        }  
+        //signaler un commentaire
+        elseif ($_GET['action'] == 'reportComment') 
+        { 
+            FrontendController::reportComment();
+        }
 
-        //Modifie le commentaire
-        elseif ($_GET['action'] == 'update') 
+        //Supprime un commentaire
+        elseif ($_GET['action'] == 'deleteComment') 
+        { 
+            BackendController::deleteComment();
+        }
+
+        //conserve un commentaire
+        elseif ($_GET['action'] == 'keepComment') 
+        { 
+            BackendController::keepComment();
+        }
+
+        //Afiche un message d'erreur
+        elseif ($_GET['action'] == 'error') 
         {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
-            {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) 
-                {
-                    updateComment($_GET['id'], addslashes($_POST['author']), addslashes($_POST['comment']));
-                }
-                else
-                {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
-                }
-            }
-            else
-            {
-                FrontendController::listPosts();
-            }
-        }  
+            FrontendController::error();
+        } 
+
+        //Récupère la liste des commentaires signlés
+        elseif ($_GET['action'] == 'moderation') 
+        {
+            BackendController::getReportComments();
+        }
+
 
     }
     else 
     {
         FrontendController::listPosts();
     }
-}
-catch(Exception $e) {
-    echo 'Erreur : ' . $e->getMessage();
-}
+
+
+

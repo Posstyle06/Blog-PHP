@@ -3,7 +3,7 @@
 
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=db5000229110.hosting-data.io;dbname=dbs223701;charset=utf8', 'dbu50149', 'Posstyle06200@');
 }
 catch(Exception $e)
 {
@@ -13,15 +13,15 @@ catch(Exception $e)
 if(!empty($_POST['pseudo']) AND !empty($_POST['pass']) AND !empty($_POST['pass2']) AND !empty($_POST['email']) )
 {
     
-$pseudo= $_POST['pseudo'];
-$email= $_POST['email'];
+    $pseudo= $_POST['pseudo'];
+    $email= $_POST['email'];
 
 
-$reponse = $bdd->query('SELECT COUNT(*) AS result FROM members WHERE pseudo="'.$pseudo.'"');
-$donnees = $reponse->fetch();
-$reponse->closeCursor();
+    $reponse = $bdd->query('SELECT COUNT(*) AS result FROM members WHERE pseudo="'.$pseudo.'"');
+    $donnees = $reponse->fetch();
+    $reponse->closeCursor();
 
-$result= $donnees['result'];
+    $result= $donnees['result'];
 
         if ($result==0){
             
@@ -45,36 +45,36 @@ $result= $donnees['result'];
                             $bdd->exec("INSERT INTO members (pseudo, pass, email, registration_date) VALUES
                                     ('$pseudo','$pass_hache', '$email', NOW())");
 
-                            header('Location: inscription.php');
+                            header('Location: registration.php');
                         }
                         else
                         {
-                        echo "Erreur de confirmation du mot de passe<p><a href= http://localhost/PHP/registration/registration.php>Retour à la page d'nscription</a></p>";
+                            echo "Erreur de confirmation du mot de passe<p><a href= registration.php>Retour à la page d'nscription</a></p>";
                         }
 	               
                     } 
 	                else {
 
-		            echo "Un compte est déjà associé à cet email<p><a href= http://localhost/PHP/registration/registration.php>Retour à la page d'nscription</a></p>";
+		                echo "Un compte est déjà associé à cet email<p><a href= registration.php>Retour à la page d'nscription</a></p>";
 	                }
             }
             else 
             {
-            echo "L'adresse mail saisie est invalide<p><a href= http://localhost/PHP/registration/registration.php>Retour à la page d'nscription</a></p>";   
+                echo "L'adresse mail saisie est invalide<p><a href= registration.php>Retour à la page d'nscription</a></p>";   
             }
         }
         else
         {
-        echo "Ce pseudo est déjà pris<p><a href= http://localhost/PHP/registration/registration.php>Retour à la page d'nscription</a></p>"; 
+            echo "Ce pseudo est déjà pris<p><a href= registration.php>Retour à la page d'nscription</a></p>"; 
         }
 
 }
 else
 {
-    echo "Tous les champs doivent être remplis<p><a href= http://localhost/PHP/registration/registration.php>Retour à la page d'nscription</a></p>";
+    echo "Tous les champs doivent être remplis<p><a href= registration.php>Retour à la page d'nscription</a></p>";
 
 }
 
-header('Location: http://localhost/PHP/projet4/index.php')
+header('Location: ../index.php')
 ?>
 
